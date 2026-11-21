@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="hikemadeira.com" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata>
+    <name>PR 15 - Vereda da Ribeira da Janela</name>
+    <desc>GPS track for PR 15: PR 15 - Vereda da Ribeira da Janela (hikemadeira.com). Data © OpenStreetMap contributors, ODbL-1.0: https://www.openstreetmap.org/copyright. Trail page: https://hikemadeira.com/szlaki/pr-15</desc>
+    <link href="https://hikemadeira.com/szlaki/pr-15"><text>hikemadeira.com</text></link>
+  </metadata>
+  <trk>
+    <name>PR 15 - Vereda da Ribeira da Janela</name>
+    <trkseg>
+      <trkpt lat="32.825918" lon="-17.15793"/>
+      <trkpt lat="32.827413" lon="-17.158451"/>
+      <trkpt lat="32.828038" lon="-17.158122"/>
+      <trkpt lat="32.829207" lon="-17.158003"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.829207" lon="-17.158003"/>
+      <trkpt lat="32.829995" lon="-17.157835"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.829995" lon="-17.157835"/>
+      <trkpt lat="32.830517" lon="-17.157519"/>
+      <trkpt lat="32.832427" lon="-17.157429"/>
+      <trkpt lat="32.833326" lon="-17.156845"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.833326" lon="-17.156845"/>
+      <trkpt lat="32.833513" lon="-17.156642"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.833513" lon="-17.156642"/>
+      <trkpt lat="32.836141" lon="-17.156829"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.836141" lon="-17.156829"/>
+      <trkpt lat="32.836413" lon="-17.156868"/>
+      <trkpt lat="32.836937" lon="-17.157741"/>
+      <trkpt lat="32.838028" lon="-17.158693"/>
+      <trkpt lat="32.838789" lon="-17.157122"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.838789" lon="-17.157122"/>
+      <trkpt lat="32.839675" lon="-17.15678"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.839675" lon="-17.15678"/>
+      <trkpt lat="32.840477" lon="-17.156037"/>
+      <trkpt lat="32.840565" lon="-17.155482"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.840565" lon="-17.155482"/>
+      <trkpt lat="32.841297" lon="-17.155507"/>
+      <trkpt lat="32.841788" lon="-17.155916"/>
+      <trkpt lat="32.842551" lon="-17.156101"/>
+      <trkpt lat="32.843382" lon="-17.155294"/>
+      <trkpt lat="32.84374" lon="-17.155352"/>
+      <trkpt lat="32.844163" lon="-17.155062"/>
+    </trkseg>
+  </trk>
+</gpx>

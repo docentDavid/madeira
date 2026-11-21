@@ -44,7 +44,7 @@
   function updateOnline() {
     if (!off) { return; }
     off.hidden = navigator.onLine;
-    off.textContent = navigator.onLine ? '' : 'Je bent offline. De gids werkt gewoon; kaart- en GPX-links hebben internet nodig.';
+    off.textContent = navigator.onLine ? '' : 'Je bent offline. De gids en GPX-bestanden werken gewoon; kaartlinks hebben internet nodig.';
   }
   window.addEventListener('online', updateOnline);
   window.addEventListener('offline', updateOnline);

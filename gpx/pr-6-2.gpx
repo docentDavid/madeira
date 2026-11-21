@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="hikemadeira.com" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata>
+    <name>PR 6.2 - Levada do Alecrim</name>
+    <desc>GPS track for PR 6.2: PR 6.2 - Levada do Alecrim (hikemadeira.com). Data © OpenStreetMap contributors, ODbL-1.0: https://www.openstreetmap.org/copyright. Trail page: https://hikemadeira.com/szlaki/pr-6-2</desc>
+    <link href="https://hikemadeira.com/szlaki/pr-6-2"><text>hikemadeira.com</text></link>
+  </metadata>
+  <trk>
+    <name>PR 6.2 - Levada do Alecrim</name>
+    <trkseg>
+      <trkpt lat="32.753337" lon="-17.132349"/>
+      <trkpt lat="32.753986" lon="-17.132972"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.753885" lon="-17.126028"/>
+      <trkpt lat="32.753163" lon="-17.126975"/>
+      <trkpt lat="32.75262" lon="-17.12834"/>
+      <trkpt lat="32.75272" lon="-17.130215"/>
+      <trkpt lat="32.752586" lon="-17.1311"/>
+      <trkpt lat="32.753337" lon="-17.132349"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.754008" lon="-17.12606"/>
+      <trkpt lat="32.753885" lon="-17.126028"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.755243" lon="-17.130284"/>
+      <trkpt lat="32.754046" lon="-17.128608"/>
+      <trkpt lat="32.753774" lon="-17.127519"/>
+      <trkpt lat="32.754008" lon="-17.12606"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.755421" lon="-17.1303"/>
+      <trkpt lat="32.755243" lon="-17.130284"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.75792" lon="-17.130017"/>
+      <trkpt lat="32.757459" lon="-17.130211"/>
+      <trkpt lat="32.757294" lon="-17.130087"/>
+      <trkpt lat="32.756768" lon="-17.13038"/>
+      <trkpt lat="32.755421" lon="-17.1303"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.758039" lon="-17.129865"/>
+      <trkpt lat="32.75792" lon="-17.130017"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.758199" lon="-17.128196"/>
+      <trkpt lat="32.758255" lon="-17.129006"/>
+      <trkpt lat="32.758039" lon="-17.129865"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.758199" lon="-17.128196"/>
+      <trkpt lat="32.757953" lon="-17.12755"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.757702" lon="-17.120529"/>
+      <trkpt lat="32.75733" lon="-17.122083"/>
+      <trkpt lat="32.757558" lon="-17.123067"/>
+      <trkpt lat="32.757436" lon="-17.12372"/>
+      <trkpt lat="32.758164" lon="-17.124954"/>
+      <trkpt lat="32.758458" lon="-17.126338"/>
+      <trkpt lat="32.758394" lon="-17.126753"/>
+      <trkpt lat="32.757965" lon="-17.127144"/>
+      <trkpt lat="32.757953" lon="-17.12755"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.756901" lon="-17.111987"/>
+      <trkpt lat="32.756839" lon="-17.11287"/>
+      <trkpt lat="32.757077" lon="-17.113698"/>
+      <trkpt lat="32.756534" lon="-17.11487"/>
+      <trkpt lat="32.757197" lon="-17.116052"/>
+      <trkpt lat="32.756729" lon="-17.117577"/>
+      <trkpt lat="32.757702" lon="-17.120529"/>
+    </trkseg>
+  </trk>
+</gpx>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="hikemadeira.com" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata>
+    <name>PR 6.3 - Vereda da Lagoa do Vento</name>
+    <desc>GPS track for PR 6.3: PR 6.3 - Vereda da Lagoa do Vento (hikemadeira.com). Data © OpenStreetMap contributors, ODbL-1.0: https://www.openstreetmap.org/copyright. Trail page: https://hikemadeira.com/szlaki/pr-6-3</desc>
+    <link href="https://hikemadeira.com/szlaki/pr-6-3"><text>hikemadeira.com</text></link>
+  </metadata>
+  <trk>
+    <name>PR 6.3 - Vereda da Lagoa do Vento</name>
+    <trkseg>
+      <trkpt lat="32.761126" lon="-17.133424"/>
+      <trkpt lat="32.76095" lon="-17.133572"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.760445" lon="-17.130204"/>
+      <trkpt lat="32.760688" lon="-17.130358"/>
+      <trkpt lat="32.76187" lon="-17.132592"/>
+      <trkpt lat="32.761126" lon="-17.133424"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.760135" lon="-17.126289"/>
+      <trkpt lat="32.760268" lon="-17.127284"/>
+      <trkpt lat="32.759483" lon="-17.12829"/>
+      <trkpt lat="32.760056" lon="-17.129242"/>
+      <trkpt lat="32.760225" lon="-17.130044"/>
+      <trkpt lat="32.760445" lon="-17.130204"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.760073" lon="-17.126119"/>
+      <trkpt lat="32.760135" lon="-17.126289"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.760056" lon="-17.126072"/>
+      <trkpt lat="32.760073" lon="-17.126119"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.760031" lon="-17.126004"/>
+      <trkpt lat="32.760056" lon="-17.126072"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.759433" lon="-17.123183"/>
+      <trkpt lat="32.759424" lon="-17.123741"/>
+      <trkpt lat="32.760148" lon="-17.125227"/>
+      <trkpt lat="32.760031" lon="-17.126004"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.758702" lon="-17.121012"/>
+      <trkpt lat="32.758706" lon="-17.121516"/>
+      <trkpt lat="32.75845" lon="-17.121954"/>
+      <trkpt lat="32.758541" lon="-17.122381"/>
+      <trkpt lat="32.758778" lon="-17.12294"/>
+      <trkpt lat="32.759255" lon="-17.123248"/>
+      <trkpt lat="32.759433" lon="-17.123183"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.758433" lon="-17.120471"/>
+      <trkpt lat="32.758702" lon="-17.121012"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.757702" lon="-17.120529"/>
+      <trkpt lat="32.75824" lon="-17.12033"/>
+      <trkpt lat="32.758433" lon="-17.120471"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="32.760176" lon="-17.122303"/>
+      <trkpt lat="32.760069" lon="-17.122531"/>
+      <trkpt lat="32.760042" lon="-17.122351"/>
+      <trkpt lat="32.759645" lon="-17.122437"/>
+      <trkpt lat="32.759542" lon="-17.122233"/>
+      <trkpt lat="32.759263" lon="-17.122224"/>
+      <trkpt lat="32.759149" lon="-17.12255"/>
+      <trkpt lat="32.759433" lon="-17.123183"/>
+    </trkseg>
+  </trk>
+</gpx>
