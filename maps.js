@@ -4,19 +4,22 @@
   if (!window.L) { return; }
 
   var ROUTES = {
-    dag17: { tracks: [{ src: 'gpx/pontadesaolourenco.gpx', name: 'PR8 Ponta de São Lourenço' }] },
+    dag17: { tracks: [{ src: 'gpx/pontadesaolourenco.gpx', name: 'PR8 Ponta de São Lourenço' }],
+             extras: [{ src: 'gpx/uitbreiding-pico-do-furado.gpx', name: 'Uitzichtpunt Pico do Furado' }] },
     dag18: { tracks: [{ src: 'gpx/pr-1-tot-pedra-rija.gpx', name: 'PR1 Areeiro → Pedra Rija' },
                       { src: 'gpx/veredadopicoruivo.gpx', name: 'PR1.2 naar Pico Ruivo' }],
              note: 'Het PR1-stuk is afgeknipt op 1,2 km (Pedra Rija); het eindpunt is bij benadering. Loop niet verder dan de afsluiting en volg de borden.' },
-    dag19: { tracks: [{ src: 'gpx/queimadascaldeiraoverde.gpx', name: 'PR9 Caldeirão Verde' }] },
+    dag19: { tracks: [{ src: 'gpx/queimadascaldeiraoverde.gpx', name: 'PR9 Caldeirão Verde' }],
+             extras: [{ src: 'gpx/uitbreiding-caldeirao-do-inferno.gpx', name: 'Caldeirão do Inferno' }] },
     dag20: { tracks: [{ src: 'gpx/veredadosbalcoes.gpx', name: 'PR11 Balcões' },
                       { src: 'gpx/levadadorei.gpx', name: 'PR18 Levada do Rei' }] },
-    dag21: { tracks: [{ src: 'gpx/rabacal25fontesrisco.gpx', name: '25 Fontes + Risco' },
-                      { src: 'gpx/pr-6-2.gpx', name: 'PR6.2 Levada do Alecrim', option: true },
-                      { src: 'gpx/pr-6-3.gpx', name: 'PR6.3 Lagoa do Vento', option: true }] },
-    dag22: { tracks: [{ src: 'gpx/fanal.gpx', name: 'Fanal-rondwandeling' },
-                      { src: 'gpx/pr-13.gpx', name: 'PR13 (enkele reis, optie)', option: true }] }
+    dag21: { tracks: [{ src: 'gpx/rabacal25fontesrisco.gpx', name: '25 Fontes + Risco' }],
+             extras: [{ src: 'gpx/pr-6-2.gpx', name: 'PR6.2 Levada do Alecrim' },
+                      { src: 'gpx/pr-6-3.gpx', name: 'PR6.3 Lagoa do Vento' }] },
+    dag22: { tracks: [{ src: 'gpx/fanal.gpx', name: 'Fanal-rondwandeling' }],
+             extras: [{ src: 'gpx/pr-13.gpx', name: 'PR13 Vereda do Fanal (deel)' }] }
   };
+  var EXT_COLORS = ['#ea580c', '#0d9488'];
   var COLORS = ['#d62828', '#1d4ed8', '#7c3aed'];
   var touch = window.matchMedia('(pointer: coarse)').matches;
 
@@ -82,32 +85,44 @@
     var group = L.featureGroup().addTo(map);
     var loaded = 0;
 
-    cfg.tracks.forEach(function (t, i) {
-      var color = COLORS[i % COLORS.length];
+    var list = cfg.tracks.map(function (t, i) { return { t: t, color: COLORS[i % COLORS.length] }; });
+    (cfg.extras || []).forEach(function (t, i) { list.push({ t: t, ext: i + 1, color: EXT_COLORS[i % EXT_COLORS.length] }); });
+    list.forEach(function (item) {
+      var t = item.t, color = item.color, ext = item.ext;
       var li = document.createElement('li');
-      li.innerHTML = '<span class="swatch' + (t.option ? ' dashed' : '') + '" style="--c:' + color + '" aria-hidden="true"></span><span class="lname"></span> <span class="lkm muted"></span>';
-      li.querySelector('.lname').textContent = t.name;
+      li.innerHTML = (ext ? '<span class="extnum" style="--c:' + color + '" aria-hidden="true">' + ext + '</span>' : '') +
+        '<span class="swatch' + (ext ? ' dashed' : '') + '" style="--c:' + color + '" aria-hidden="true"></span><span class="lname"></span> <span class="lkm muted"></span>';
+      li.querySelector('.lname').textContent = ext ? 'Uitbreiding ' + ext + ': ' + t.name : t.name;
       legend.appendChild(li);
 
       fetch(t.src).then(function (r) { if (!r.ok) { throw new Error(r.status); } return r.text(); }).then(function (txt) {
         var segs = parseGpx(txt);
         if (!segs.length) { throw new Error('leeg'); }
         L.polyline(segs, { color: '#fff', weight: 8, opacity: 0.85, interactive: false }).addTo(group);
-        L.polyline(segs, { color: color, weight: 4.5, opacity: 0.95, dashArray: t.option ? '8 8' : null })
-          .bindTooltip(t.name, { sticky: true }).addTo(group);
+        L.polyline(segs, { color: color, weight: 4.5, opacity: 0.95, dashArray: ext ? '10 8' : null })
+          .bindTooltip(ext ? 'Uitbreiding ' + ext + ': ' + t.name : t.name, { sticky: true }).addTo(group);
+        if (ext) {
+          var flatPts = [].concat.apply([], segs);
+          L.marker(flatPts[Math.floor(flatPts.length / 2)], {
+            keyboard: false, title: 'Uitbreiding ' + ext + ': ' + t.name,
+            icon: L.divIcon({ className: 'extmark', html: '<span class="extnum" style="--c:' + color + '">' + ext + '</span>', iconSize: [28, 28], iconAnchor: [14, 14] })
+          }).addTo(group);
+        }
         var first = segs[0][0], lastSeg = segs[segs.length - 1], last = lastSeg[lastSeg.length - 1];
-        L.circleMarker(first, { radius: 7, color: '#fff', weight: 3, fillColor: '#15803d', fillOpacity: 1 })
-          .bindTooltip('Start: ' + t.name).addTo(group);
-        if (haversine(first, last) > 0.15) {
+        if (!ext) {
+          L.circleMarker(first, { radius: 7, color: '#fff', weight: 3, fillColor: '#15803d', fillOpacity: 1 })
+            .bindTooltip('Start: ' + t.name).addTo(group);
+        }
+        if (!ext && haversine(first, last) > 0.15) {
           L.circleMarker(last, { radius: 7, color: '#fff', weight: 3, fillColor: '#111', fillOpacity: 1 })
             .bindTooltip('Einde: ' + t.name).addTo(group);
         }
-        li.querySelector('.lkm').textContent = '· ' + km(segs) + ' volgens GPX';
+        li.querySelector('.lkm').textContent = '· ' + km(segs) + (ext ? ' enkele reis' : '') + ' volgens GPX';
       }).catch(function () {
         li.querySelector('.lkm').textContent = '· route kon niet worden geladen';
       }).then(function () {
         loaded++;
-        if (loaded === cfg.tracks.length && group.getLayers().length) { fit(); }
+        if (loaded === list.length && group.getLayers().length) { fit(); }
       });
     });
 

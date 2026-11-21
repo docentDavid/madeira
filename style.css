@@ -338,6 +338,21 @@ html.map-open, html.map-open body { overflow: hidden; }
 html.map-open .tabbar, html.map-open .daynav { visibility: hidden; }
 @media print { .maptools, .maphint, .map { display: none !important; } }
 
+/* Extensions */
+.extnum { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--c); color: #fff; font-weight: 800; font-size: .85rem; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.35); }
+.extmark { background: none; border: 0; }
+.extras { margin: 0 0 24px; border-left: 5px solid #ea580c; }
+.extlist { list-style: none; margin: 0; padding: 0; }
+.extlist > li { padding: 14px 0; border-top: 1px solid var(--line); }
+.extlist > li:first-child { border-top: 0; padding-top: 4px; }
+.extlist h4 { display: flex; align-items: center; gap: 10px; margin: 0 0 6px; font-size: 1.05rem; line-height: 1.3; }
+.extra-km { margin: 0 0 8px; }
+.extdl { margin: 0 0 6px; }
+.extdl dt { font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+.extdl dd { margin: 2px 0 0; }
+.rating { display: inline-block; font-size: .8rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); color: var(--accent); margin-right: 4px; }
+.extlist a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+
 /* Print */
 @media print {
   .daynav, .tabbar, .skip, .actions, #reset, .today, .hero-art { display: none !important; }
