@@ -306,7 +306,7 @@ td a { display: inline-block; padding: 4px 0; font-weight: 600; }
 .leaflet-container { font: inherit; font-size: .85rem; }
 .leaflet-touch .leaflet-bar a, .leaflet-touch .leaflet-control-layers-toggle { width: 44px; height: 44px; line-height: 44px; }
 .leaflet-control-layers-expanded label { padding: 6px 4px; font-size: .95rem; }
-.maptools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border-top: 1px solid var(--line); }
+.maptools { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border-top: 1px solid var(--line); }
 .mapbtn {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
   min-height: 56px; border: 0; background: var(--surface); color: var(--link);
@@ -352,6 +352,21 @@ html.map-open .tabbar, html.map-open .daynav { visibility: hidden; }
 .extdl dd { margin: 2px 0 0; }
 .rating { display: inline-block; font-size: .8rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); color: var(--accent); margin-right: 4px; }
 .extlist a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+
+/* Map places, drives, show-on-map */
+.placepin { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50% 50% 50% 4px; transform: rotate(-45deg); background: #b45309; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.4); color: #fff; }
+.placepin svg { width: 16px; height: 16px; transform: rotate(45deg); fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.placepin.airport { border-radius: 50%; transform: none; background: #334155; font-size: 15px; line-height: 1; }
+.placepin.small { width: 22px; height: 22px; flex: none; }
+.placepin.small svg { width: 12px; height: 12px; }
+.swatch.drive { border-top: 5px dotted #334155; }
+@media (prefers-color-scheme: dark) { .swatch.drive { border-top-color: #cbd5e1; } }
+.popup strong { display: block; font-size: 1rem; margin-bottom: 4px; }
+.popup p { margin: 0 0 6px !important; font-size: .9rem; }
+.popup a { font-weight: 700; }
+.showmap { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-left: 16px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); color: var(--link); font: inherit; font-size: .9rem; font-weight: 700; cursor: pointer; vertical-align: middle; }
+.showmap svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+@media (max-width: 420px) { .showmap { margin-left: 0; } }
 
 /* Print */
 @media print {

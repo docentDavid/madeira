@@ -20,6 +20,10 @@
              extras: [{ src: 'gpx/pr-13.gpx', name: 'PR13 Vereda do Fanal (deel)' }] }
   };
   var EXT_COLORS = ['#ea580c', '#0d9488'];
+  var DRIVE_COLOR = '#334155';
+  var DATA = fetch('data/kaart.json').then(function (r) { return r.json(); }).catch(function () { return null; });
+  var built = {};
+  var PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
   var COLORS = ['#d62828', '#1d4ed8', '#7c3aed'];
   var touch = window.matchMedia('(pointer: coarse)').matches;
 
@@ -78,12 +82,17 @@
       dragging: !touch, tap: false, scrollWheelZoom: false,
       zoomSnap: 0.5
     });
-    L.control.layers(layers, null, { position: 'topright' }).addTo(map);
+    var driveGroup = L.featureGroup().addTo(map);
+    var walksDone;
+    var group = L.featureGroup().addTo(map);
+    var sightGroup = L.featureGroup().addTo(map);
+    L.control.layers(layers, { 'Wandelroutes': group, 'Autoritten': driveGroup, 'Bezienswaardigheden': sightGroup }, { position: 'topright' }).addTo(map);
     L.control.scale({ imperial: false }).addTo(map);
     map.attributionControl.setPrefix(false);
-
-    var group = L.featureGroup().addTo(map);
     var loaded = 0;
+    var sightMarkers = {};
+    var resolveReady;
+    var ready = new Promise(function (res) { resolveReady = res; });
 
     var list = cfg.tracks.map(function (t, i) { return { t: t, color: COLORS[i % COLORS.length] }; });
     (cfg.extras || []).forEach(function (t, i) { list.push({ t: t, ext: i + 1, color: EXT_COLORS[i % EXT_COLORS.length] }); });
@@ -122,9 +131,54 @@
         li.querySelector('.lkm').textContent = '· route kon niet worden geladen';
       }).then(function () {
         loaded++;
-        if (loaded === list.length && group.getLayers().length) { fit(); }
+        if (loaded === list.length) { walksDone(); }
       });
     });
+
+    // Autoritten en bezienswaardigheden uit data/kaart.json
+    var dataDone = DATA.then(function (data) {
+      if (!data) { return; }
+      (data.days[id] || []).forEach(function (d) {
+        L.polyline(d.line, { color: '#fff', weight: 7, opacity: 0.8, interactive: false }).addTo(driveGroup);
+        L.polyline(d.line, { color: DRIVE_COLOR, weight: 4, opacity: 0.9, dashArray: '1 9', lineCap: 'round' })
+          .bindTooltip('Autorit – ' + d.label + ': ca. ' + d.km.toString().replace('.', ',') + ' km, ' + d.min + ' min', { sticky: true }).addTo(driveGroup);
+        var li = document.createElement('li');
+        li.innerHTML = '<span class="swatch drive" aria-hidden="true"></span><span class="lname"></span> <span class="lkm muted"></span>';
+        li.querySelector('.lname').textContent = 'Autorit: ' + d.label.toLowerCase();
+        li.querySelector('.lkm').textContent = '· ca. ' + d.km.toString().replace('.', ',') + ' km, ' + d.min + ' min';
+        legend.appendChild(li);
+      });
+      if (id === 'dag17' && data.places.airport) {
+        L.marker(data.places.airport.ll, {
+          title: 'Luchthaven (autoverhuur)', keyboard: false,
+          icon: L.divIcon({ className: 'extmark', html: '<span class="placepin airport" aria-hidden="true">✈</span>', iconSize: [30, 30], iconAnchor: [15, 15] })
+        }).bindTooltip('Luchthaven (autoverhuur)').addTo(driveGroup);
+      }
+      var keys = (data.sights && data.sights[id]) || [];
+      keys.forEach(function (key) {
+        var pl = data.places[key]; if (!pl) { return; }
+        var item = document.querySelector('#' + id + ' [data-stop="' + key + '"]');
+        var desc = item ? (item.querySelector('.stop-name + p') || {}).textContent || '' : '';
+        var link = item ? item.querySelector('a.ext') : null;
+        var html = '<strong></strong><p></p>' + (link ? '<a class="ext" target="_blank" rel="noopener">Open in Google Maps</a>' : '');
+        var box = document.createElement('div'); box.className = 'popup'; box.innerHTML = html;
+        box.querySelector('strong').textContent = pl.name;
+        box.querySelector('p').textContent = desc;
+        if (link) { box.querySelector('a').href = link.href; }
+        sightMarkers[key] = L.marker(pl.ll, {
+          title: pl.name, keyboard: false, riseOnHover: true,
+          icon: L.divIcon({ className: 'extmark', html: '<span class="placepin">' + PIN + '</span>', iconSize: [30, 30], iconAnchor: [15, 15], popupAnchor: [0, -14] })
+        }).bindPopup(box, { maxWidth: 210, autoPanPaddingTopLeft: L.point(64, 24), autoPanPaddingBottomRight: L.point(24, 40) }).bindTooltip(pl.name, { direction: 'top', offset: [0, -14] }).addTo(sightGroup);
+      });
+      if (keys.length) {
+        var li = document.createElement('li');
+        li.innerHTML = '<span class="placepin small" aria-hidden="true">' + PIN + '</span><span class="lname">Bezienswaardigheden (zie Hierna nog zien)</span>';
+        legend.appendChild(li);
+      }
+    });
+
+    var walkReady = new Promise(function (res) { walksDone = res; });
+    Promise.all([walkReady, dataDone]).then(function () { fitAll(); resolveReady(); });
 
     if (cfg.note) {
       var n = document.createElement('p');
@@ -133,8 +187,14 @@
       legend.parentNode.insertBefore(n, legend.nextSibling);
     }
 
+    var FIT = { paddingTopLeft: [28, 28], paddingBottomRight: [28, 56] };
     function fit() {
-      if (group.getLayers().length) { map.fitBounds(group.getBounds(), { paddingTopLeft: [28, 28], paddingBottomRight: [28, 56] }); }
+      if (group.getLayers().length) { map.fitBounds(group.getBounds(), FIT); }
+    }
+    function fitAll() {
+      var b = L.latLngBounds([]);
+      [group, driveGroup, sightGroup].forEach(function (g) { if (map.hasLayer(g) && g.getLayers().length) { b.extend(g.getBounds()); } });
+      if (b.isValid()) { map.fitBounds(b, FIT); } else { fit(); }
     }
 
     // Volledig scherm (werkt ook op iPhone, zonder Fullscreen API)
@@ -147,7 +207,7 @@
       fig.classList.toggle('is-fs', on);
       document.documentElement.classList.toggle('map-open', on);
       fsBtn.setAttribute('aria-pressed', String(on));
-      fsBtn.querySelector('span').textContent = on ? 'Verkleinen' : 'Volledig scherm';
+      fsBtn.querySelector('span').textContent = on ? 'Verkleinen' : 'Groot scherm';
       closeBtn.hidden = !on;
       if (on) { map.dragging.enable(); } else if (touch) { map.dragging.disable(); }
       setTimeout(function () { map.invalidateSize(); }, 60);
@@ -183,17 +243,48 @@
     });
 
     fig.querySelector('[data-act="fit"]').addEventListener('click', fit);
+    fig.querySelector('[data-act="all"]').addEventListener('click', fitAll);
+
+    return {
+      showStop: function (key) {
+        return ready.then(function () {
+          var m = sightMarkers[key]; if (!m) { return; }
+          if (!map.hasLayer(sightGroup)) { map.addLayer(sightGroup); }
+          fig.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+          setTimeout(function () { map.invalidateSize(); map.setView(m.getLatLng(), 14, { animate: false }); map.panBy([0, -70], { animate: false }); m.openPopup(); }, 450);
+        });
+      }
+    };
   }
+
+  function ensure(fig) {
+    var id = fig.getAttribute('data-day');
+    if (!built[id]) { built[id] = build(fig); }
+    return built[id];
+  }
+
+  // Knop "Toon op kaart" bij iedere bezienswaardigheid
+  document.querySelectorAll('[data-stop]').forEach(function (item) {
+    var day = item.closest('.day'); if (!day) { return; }
+    var fig = day.querySelector('.mapbox'); if (!fig) { return; }
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'showmap';
+    btn.innerHTML = PIN + '<span>Toon op routekaart</span>';
+    var name = item.querySelector('.stop-name');
+    btn.setAttribute('aria-label', 'Toon ' + (name ? name.firstChild.textContent.trim() : '') + ' op de routekaart');
+    btn.addEventListener('click', function () { ensure(fig).showStop(item.getAttribute('data-stop')); });
+    item.appendChild(btn);
+  });
 
   var figs = document.querySelectorAll('.mapbox');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) { io.unobserve(e.target); build(e.target); }
+        if (e.isIntersecting) { io.unobserve(e.target); ensure(e.target); }
       });
     }, { rootMargin: '400px 0px' });
     figs.forEach(function (f) { io.observe(f); });
   } else {
-    figs.forEach(build);
+    figs.forEach(ensure);
   }
 })();
