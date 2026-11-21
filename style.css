@@ -109,6 +109,7 @@ main:focus { outline: none; }
 .daynav {
   position: sticky; top: 0; z-index: 20;
   padding-top: env(safe-area-inset-top);
+  background: var(--bg);
   background: color-mix(in srgb, var(--bg) 92%, transparent);
   -webkit-backdrop-filter: saturate(1.4) blur(12px); backdrop-filter: saturate(1.4) blur(12px);
   border-bottom: 1px solid var(--line);
@@ -131,7 +132,9 @@ main:focus { outline: none; }
 
 /* Bottom tab bar (app style) */
 .tabbar {
+  display: none;
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  background: var(--surface);
   background: color-mix(in srgb, var(--surface) 92%, transparent);
   -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px);
   border-top: 1px solid var(--line);
@@ -145,11 +148,9 @@ main:focus { outline: none; }
 .tabbar svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .tabbar a[aria-current="page"] { color: var(--link); }
 .tabbar a[aria-current="page"] svg { stroke-width: 2.3; }
-body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
 
 /* App feel */
-html, body { overflow-x: clip; max-width: 100%; }
-html { overscroll-behavior-x: none; }
+body { overflow-x: clip; }
 body { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 .daynav, .tabbar, .btn, .cards a { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 .btn:active, .cards a:active, .daynav a:active, .tabbar a:active { transform: scale(.97); }
@@ -158,6 +159,8 @@ body { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 .mini-links a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
 .reserve li:first-child { padding-top: 0; }
 @media (display-mode: standalone) {
+  .tabbar { display: block; }
+  body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
   .install, .skip { display: none; }
   .hero { padding: calc(20px + env(safe-area-inset-top)) 0 70px; }
   .hero-art { height: 80px; }

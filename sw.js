@@ -1,5 +1,5 @@
 // Service worker: maakt de reisgids volledig offline bruikbaar.
-var CACHE = 'madeira-v3';
+var CACHE = 'madeira-v4';
 var FILES = ['./', 'index.html', 'style.css', 'app.js', 'icon.svg', 'icon-180.png', 'icon-192.png', 'icon-512.png', 'manifest.webmanifest', 'Madeira_reisgids_17-23_december_2026.pdf',
   'gpx/fanal.gpx', 'gpx/levadadorei.gpx', 'gpx/pontadesaolourenco.gpx', 'gpx/pr-13.gpx', 'gpx/pr-15.gpx', 'gpx/pr-5.gpx', 'gpx/pr-6-2.gpx', 'gpx/pr-6-3.gpx', 'gpx/queimadascaldeiraoverde.gpx', 'gpx/rabacal25fontesrisco.gpx', 'gpx/veredadopicoruivo.gpx', 'gpx/veredadosbalcoes.gpx'];
 
