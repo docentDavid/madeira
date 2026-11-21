@@ -50,29 +50,34 @@
   window.addEventListener('offline', updateOnline);
   updateOnline();
 
-  // 3. Actieve sectie markeren in de navigatie.
-  var links = Array.prototype.slice.call(document.querySelectorAll('.daynav a'));
-  var targets = links.map(function (a) { return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
-  if ('IntersectionObserver' in window && targets.length) {
-    var current = null;
-    var setActive = function (id) {
-      if (id === current) { return; }
-      current = id;
-      links.forEach(function (a) {
-        var on = a.getAttribute('href') === '#' + id;
-        if (on) {
-          a.setAttribute('aria-current', 'true');
-          var nav = a.closest('ul');
-          var left = a.offsetLeft - nav.clientWidth / 2 + a.offsetWidth / 2;
-          nav.scrollTo({ left: left, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-        } else {
-          a.removeAttribute('aria-current');
-        }
-      });
-    };
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) { setActive(e.target.id); } });
-    }, { rootMargin: '-30% 0px -60% 0px' });
-    targets.forEach(function (t) { io.observe(t); });
+  // 3. Actieve dag + actieve tab markeren.
+  var dayLinks = Array.prototype.slice.call(document.querySelectorAll('.daynav a'));
+  var tabLinks = Array.prototype.slice.call(document.querySelectorAll('.tabbar a'));
+  var tabDagen = document.getElementById('tab-dagen');
+  if (day && tabDagen) { tabDagen.setAttribute('href', '#' + day.id); }
+  var sections = ['overzicht', 'dag17', 'dag18', 'dag19', 'dag20', 'dag21', 'dag22', 'checklist', 'extra']
+    .map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  function groupOf(id) {
+    if (/^dag/.test(id)) { return 'dagen'; }
+    if (id === 'checklist' || id === 'extra') { return id; }
+    return 'top';
   }
+  function update() {
+    var line = window.innerHeight * 0.35;
+    var current = 'top';
+    sections.forEach(function (sec) { if (sec.getBoundingClientRect().top <= line) { current = sec.id; } });
+    dayLinks.forEach(function (a) {
+      if (a.getAttribute('href') === '#' + current) { a.setAttribute('aria-current', 'true'); } else { a.removeAttribute('aria-current'); }
+    });
+    var g = groupOf(current);
+    tabLinks.forEach(function (a) {
+      if (a.getAttribute('data-tab') === g) { a.setAttribute('aria-current', 'page'); } else { a.removeAttribute('aria-current'); }
+    });
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; update(); }); }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 })();

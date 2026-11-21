@@ -2,19 +2,21 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Madeira te voet – reisgids 17-23 december 2026</title>
 <meta name="description" content="Wandelreisgids Madeira 17-23 december 2026: zes dagplannen met routes, GPX-links, uitzichtpunten, alternatieven en een checklist.">
 <meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f1c1a" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-180.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Madeira">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="top">
 <a class="skip" href="#inhoud">Direct naar de inhoud</a>
 
 <header class="hero">
@@ -36,17 +38,14 @@
   </div>
 </header>
 
-<nav class="daynav" aria-label="Snel naar onderdeel">
+<nav class="daynav" aria-label="Reisdagen">
   <ul class="wrap">
-    <li><a href="#overzicht">Overzicht</a></li>
-    <li><a href="#dag17">Do 17</a></li>
-    <li><a href="#dag18">Vr 18</a></li>
-    <li><a href="#dag19">Za 19</a></li>
-    <li><a href="#dag20">Zo 20</a></li>
-    <li><a href="#dag21">Ma 21</a></li>
-    <li><a href="#dag22">Di 22</a></li>
-    <li><a href="#checklist">Checklist</a></li>
-    <li><a href="#extra">Extra &amp; nood</a></li>
+    <li><a href="#dag17" aria-label="donderdag 17 december"><span class="dw" aria-hidden="true">Do</span><span class="dn" aria-hidden="true">17</span></a></li>
+    <li><a href="#dag18" aria-label="vrijdag 18 december"><span class="dw" aria-hidden="true">Vr</span><span class="dn" aria-hidden="true">18</span></a></li>
+    <li><a href="#dag19" aria-label="zaterdag 19 december"><span class="dw" aria-hidden="true">Za</span><span class="dn" aria-hidden="true">19</span></a></li>
+    <li><a href="#dag20" aria-label="zondag 20 december"><span class="dw" aria-hidden="true">Zo</span><span class="dn" aria-hidden="true">20</span></a></li>
+    <li><a href="#dag21" aria-label="maandag 21 december"><span class="dw" aria-hidden="true">Ma</span><span class="dn" aria-hidden="true">21</span></a></li>
+    <li><a href="#dag22" aria-label="dinsdag 22 december"><span class="dw" aria-hidden="true">Di</span><span class="dn" aria-hidden="true">22</span></a></li>
   </ul>
 </nav>
 
@@ -549,17 +548,12 @@
 
   <section class="panel" aria-labelledby="reserve-h">
     <h3 id="reserve-h">Reserveroutes bij afsluiting</h3>
-    <div class="table-wrap" tabindex="0" role="region" aria-labelledby="reserve-h">
-      <table>
-        <thead><tr><th scope="col">Route</th><th scope="col">Afstand</th><th scope="col">Opmerking</th><th scope="col">Links</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">PR5 Funduras</th><td>8,7 km enkele reis</td><td>Met auto alleen heen en terug langs dezelfde route.</td><td><a class="gpx" href="gpx/pr-5.gpx" download>GPX<span class="sr"> PR5</span></a><br><a class="ext" href="https://www.visitmadeira.com/en/what-to-do/nature-seekers/activities/hiking/pr-5-vereda-das-funduras/">Status<span class="sr"> PR5</span></a></td></tr>
-          <tr><th scope="row">PR6.2 Levada do Alecrim</th><td>7 km retour</td><td>Ligt bij Rabaçal.</td><td><a class="gpx" href="gpx/pr-6-2.gpx" download>GPX<span class="sr"> PR6.2</span></a><br><a class="ext" href="https://www.visitmadeira.com/en/what-to-do/nature-seekers/activities/hiking/">Status<span class="sr"> PR6.2</span></a></td></tr>
-          <tr><th scope="row">PR6.3 Lagoa do Vento</th><td>3,6 km retour</td><td>Vanaf officieel beginpunt; combinatie vergt routecontrole.</td><td><a class="gpx" href="gpx/pr-6-3.gpx" download>GPX<span class="sr"> PR6.3</span></a><br><a class="ext" href="https://www.visitmadeira.com/en/what-to-do/nature-seekers/activities/hiking/pr-63-vereda-da-lagoa-do-vento/">Status<span class="sr"> PR6.3</span></a></td></tr>
-          <tr><th scope="row">PR15 Ribeira da Janela</th><td>5,4 km retour</td><td>Terugweg is een stevige klim.</td><td><a class="gpx" href="gpx/pr-15.gpx" download>GPX<span class="sr"> PR15</span></a><br><a class="ext" href="https://www.visitmadeira.com/en/what-to-do/nature-seekers/activities/hiking/pr-15-vereda-da-ribeira-da-janela/">Status<span class="sr"> PR15</span></a></td></tr>
-        </tbody>
-      </table>
-    </div>
+    <ul class="stops reserve">
+      <li><p class="stop-name">PR5 Funduras</p><p><strong>8,7 km enkele reis</strong> · Met auto alleen heen en terug langs dezelfde route.</p><p class="mini-links"><a class="gpx" href="gpx/pr-5.gpx" download>GPX<span class="sr"> PR5</span></a><a class="ext" href="https://www.visitmadeira.com/en/what-to-do/nature-seekers/activities/hiking/pr-5-vereda-das-funduras/">Status<span class="sr"> PR5</span></a></p></li>
+      <li><p class="stop-name">PR6.2 Levada do Alecrim</p><p><strong>7 km retour</strong> · Ligt bij Rabaçal.</p><p class="mini-links"><a class="gpx" href="gpx/pr-6-2.gpx" download>GPX<span class="sr"> PR6.2</span></a><a class="ext" href="https://www.visitmadeira.com/en/what-to-do/nature-seekers/activities/hiking/">Status<span class="sr"> PR6.2</span></a></p></li>
+      <li><p class="stop-name">PR6.3 Lagoa do Vento</p><p><strong>3,6 km retour</strong> · Vanaf officieel beginpunt; combinatie vergt routecontrole.</p><p class="mini-links"><a class="gpx" href="gpx/pr-6-3.gpx" download>GPX<span class="sr"> PR6.3</span></a><a class="ext" href="https://www.visitmadeira.com/en/what-to-do/nature-seekers/activities/hiking/pr-63-vereda-da-lagoa-do-vento/">Status<span class="sr"> PR6.3</span></a></p></li>
+      <li><p class="stop-name">PR15 Ribeira da Janela</p><p><strong>5,4 km retour</strong> · Terugweg is een stevige klim.</p><p class="mini-links"><a class="gpx" href="gpx/pr-15.gpx" download>GPX<span class="sr"> PR15</span></a><a class="ext" href="https://www.visitmadeira.com/en/what-to-do/nature-seekers/activities/hiking/pr-15-vereda-da-ribeira-da-janela/">Status<span class="sr"> PR15</span></a></p></li>
+    </ul>
   </section>
 
   <section class="panel emergency" aria-labelledby="nood-h">
@@ -589,9 +583,18 @@
     <p><strong>Madeira te voet ontdekt</strong> · reisgids 17–23 december 2026 · verblijf in Ribeira Brava.</p>
     <p class="small">Laatste broncontrole: 21 november 2026. Route-informatie en prijzen kunnen wijzigen. Deze gids bevat geen live tracking, live afsluitingen of offline kaarten. Kaartlinks openen Google Maps-zoekresultaten, geen gegarandeerde parkeerplaatsen.</p>
     <p class="small">Bronnen: Visit Madeira, IFCN, IPMA, timeanddate, TripMadeira, Hike Madeira en Levadas Live. GPX-bestanden zijn kopieën van TripMadeira (tripmadeira.com) en Hike Madeira (hikemadeira.com), opgehaald op 21 november 2026.</p>
-    <p><a href="#inhoud" class="small">Terug naar boven</a></p>
+    <p><a href="#top" class="small">Terug naar boven</a></p>
   </div>
 </footer>
+
+<nav class="tabbar" aria-label="Hoofdmenu">
+  <ul>
+    <li><a href="#top" data-tab="top"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Overzicht</span></a></li>
+    <li><a href="#dag17" data-tab="dagen" id="tab-dagen"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 20 9 9l4 6 2-3 6 8z"/><circle cx="17" cy="6" r="2"/></svg><span>Dagen</span></a></li>
+    <li><a href="#checklist" data-tab="checklist"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 12 3 3 5-6"/></svg><span>Checklist</span></a></li>
+    <li><a href="#extra" data-tab="extra"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6m0 4v.01"/></svg><span>Info &amp; nood</span></a></li>
+  </ul>
+</nav>
 
 <script src="app.js" defer></script>
 </body>
