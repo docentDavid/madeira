@@ -5,8 +5,9 @@
 
   var ROUTES = {
     dag17: { tracks: [{ src: 'gpx/pontadesaolourenco.gpx', name: 'PR8 Ponta de São Lourenço' }] },
-    dag18: { tracks: [{ src: 'gpx/veredadopicoruivo.gpx', name: 'PR1.2 naar Pico Ruivo' }],
-             note: 'Het korte PR1-deel van Pico do Areeiro tot Pedra Rija heeft geen GPX: volg daar de borden.' },
+    dag18: { tracks: [{ src: 'gpx/pr-1-tot-pedra-rija.gpx', name: 'PR1 Areeiro → Pedra Rija' },
+                      { src: 'gpx/veredadopicoruivo.gpx', name: 'PR1.2 naar Pico Ruivo' }],
+             note: 'Het PR1-stuk is afgeknipt op 1,2 km (Pedra Rija); het eindpunt is bij benadering. Loop niet verder dan de afsluiting en volg de borden.' },
     dag19: { tracks: [{ src: 'gpx/queimadascaldeiraoverde.gpx', name: 'PR9 Caldeirão Verde' }] },
     dag20: { tracks: [{ src: 'gpx/veredadosbalcoes.gpx', name: 'PR11 Balcões' },
                       { src: 'gpx/levadadorei.gpx', name: 'PR18 Levada do Rei' }] },
@@ -118,7 +119,7 @@
     }
 
     function fit() {
-      if (group.getLayers().length) { map.fitBounds(group.getBounds(), { padding: [24, 24] }); }
+      if (group.getLayers().length) { map.fitBounds(group.getBounds(), { paddingTopLeft: [28, 28], paddingBottomRight: [28, 56] }); }
     }
 
     // Volledig scherm (werkt ook op iPhone, zonder Fullscreen API)
