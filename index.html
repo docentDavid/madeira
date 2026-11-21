@@ -14,6 +14,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Madeira">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body id="top">
@@ -57,7 +58,7 @@
 
   <section class="panel install" aria-labelledby="offline-h">
     <h2 id="offline-h" class="notice-title">Offline gebruiken</h2>
-    <p>Open deze pagina één keer met internet. Daarna werkt de hele gids, inclusief checklist, PDF en alle 12 GPX-bestanden, ook zonder verbinding. Tip: zet hem op je beginscherm (iPhone: deelknop → <em>Zet op beginscherm</em>; Android: menu → <em>App installeren</em>). Alleen kaart- en bronlinks gaan naar externe sites en hebben wel internet nodig: zet offline kaarten daarom vooraf in Komoot.</p>
+    <p>Open deze pagina één keer met internet. Daarna werkt de hele gids, inclusief checklist, PDF en alle 12 GPX-bestanden, ook zonder verbinding. Tip: zet hem op je beginscherm (iPhone: deelknop → <em>Zet op beginscherm</em>; Android: menu → <em>App installeren</em>). De routelijnen op de kaarten werken altijd offline. De kaartachtergrond wordt bewaard voor de stukken die je al eens met internet hebt bekeken: zoom dus vooraf even in op elke route. Links naar Google Maps en bronsites hebben wel internet nodig.</p>
     <p id="offline-ready" class="small muted" hidden>✓ Klaar voor offline gebruik op dit apparaat.</p>
   </section>
 
@@ -105,6 +106,23 @@
     <li><a class="btn ext" href="https://www.google.com/maps/search/?api=1&amp;query=PR8%20-%20Ba%C3%ADa%20d%E2%80%99Abra%2C%20Cani%C3%A7al%2C%20Madeira%2C%20Portugal">Startpunt op kaart</a></li>
     <li><a class="btn btn-ghost ext" href="https://www.google.com/maps/dir/?api=1&amp;origin=Ribeira%20Brava%2C%20Madeira%2C%20Portugal&amp;destination=PR8%20-%20Ba%C3%ADa%20d%E2%80%99Abra%2C%20Cani%C3%A7al%2C%20Madeira%2C%20Portugal&amp;travelmode=driving">Route vanaf Ribeira Brava</a></li>
   </ul>
+  <figure class="mapbox" data-day="dag17">
+    <div class="maphead">
+      <h3 id="dag17-k">Routekaart</h3>
+      <button type="button" class="mapclose" hidden>Sluiten<span class="sr"> volledig scherm</span></button>
+    </div>
+    <div class="map" id="map-dag17" role="region" aria-label="Interactieve kaart met de GPX-route van Ponta de São Lourenço"><noscript>De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</noscript></div>
+    <div class="maptools">
+      <button type="button" class="mapbtn" data-act="fs" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Volledig scherm</span></button>
+      <button type="button" class="mapbtn" data-act="loc"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Mijn locatie</span></button>
+      <button type="button" class="mapbtn" data-act="fit"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 20 9 9l4 6 2-3 6 8z"/></svg><span>Hele route</span></button>
+    </div>
+    <figcaption>
+      <ul class="legend"></ul>
+      <p class="maphint small muted">Zoom met twee vingers. Tik op <em>Volledig scherm</em> om de kaart vrij te verslepen.</p>
+      <p class="mapstatus small" role="status"></p>
+    </figcaption>
+  </figure>
   <div class="grid">
     <div>
       <section class="panel" aria-labelledby="dag17-w">
@@ -171,6 +189,23 @@
     <li><a class="btn btn-ghost ext" href="https://www.google.com/maps/dir/?api=1&amp;origin=Ribeira%20Brava%2C%20Madeira%2C%20Portugal&amp;destination=Pico%20do%20Areeiro%2C%20Madeira%2C%20Portugal&amp;travelmode=driving">Route vanaf Ribeira Brava</a></li>
     <li><a class="btn btn-ghost ext" href="https://www.google.com/maps/search/?api=1&amp;query=Achada%20do%20Teixeira%2C%20Santana%2C%20Madeira%2C%20Portugal">Tweede start: Achada do Teixeira</a></li>
   </ul>
+  <figure class="mapbox" data-day="dag18">
+    <div class="maphead">
+      <h3 id="dag18-k">Routekaart</h3>
+      <button type="button" class="mapclose" hidden>Sluiten<span class="sr"> volledig scherm</span></button>
+    </div>
+    <div class="map" id="map-dag18" role="region" aria-label="Interactieve kaart met de GPX-route van Pico Ruivo"><noscript>De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</noscript></div>
+    <div class="maptools">
+      <button type="button" class="mapbtn" data-act="fs" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Volledig scherm</span></button>
+      <button type="button" class="mapbtn" data-act="loc"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Mijn locatie</span></button>
+      <button type="button" class="mapbtn" data-act="fit"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 20 9 9l4 6 2-3 6 8z"/></svg><span>Hele route</span></button>
+    </div>
+    <figcaption>
+      <ul class="legend"></ul>
+      <p class="maphint small muted">Zoom met twee vingers. Tik op <em>Volledig scherm</em> om de kaart vrij te verslepen.</p>
+      <p class="mapstatus small" role="status"></p>
+    </figcaption>
+  </figure>
   <div class="grid">
     <div>
       <section class="panel" aria-labelledby="dag18-w">
@@ -237,6 +272,23 @@
     <li><a class="btn ext" href="https://www.google.com/maps/search/?api=1&amp;query=Parque%20Florestal%20das%20Queimadas%2C%20Santana%2C%20Madeira%2C%20Portugal">Startpunt op kaart</a></li>
     <li><a class="btn btn-ghost ext" href="https://www.google.com/maps/dir/?api=1&amp;origin=Ribeira%20Brava%2C%20Madeira%2C%20Portugal&amp;destination=Parque%20Florestal%20das%20Queimadas%2C%20Santana%2C%20Madeira%2C%20Portugal&amp;travelmode=driving">Route vanaf Ribeira Brava</a></li>
   </ul>
+  <figure class="mapbox" data-day="dag19">
+    <div class="maphead">
+      <h3 id="dag19-k">Routekaart</h3>
+      <button type="button" class="mapclose" hidden>Sluiten<span class="sr"> volledig scherm</span></button>
+    </div>
+    <div class="map" id="map-dag19" role="region" aria-label="Interactieve kaart met de GPX-route van Caldeirão Verde"><noscript>De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</noscript></div>
+    <div class="maptools">
+      <button type="button" class="mapbtn" data-act="fs" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Volledig scherm</span></button>
+      <button type="button" class="mapbtn" data-act="loc"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Mijn locatie</span></button>
+      <button type="button" class="mapbtn" data-act="fit"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 20 9 9l4 6 2-3 6 8z"/></svg><span>Hele route</span></button>
+    </div>
+    <figcaption>
+      <ul class="legend"></ul>
+      <p class="maphint small muted">Zoom met twee vingers. Tik op <em>Volledig scherm</em> om de kaart vrij te verslepen.</p>
+      <p class="mapstatus small" role="status"></p>
+    </figcaption>
+  </figure>
   <div class="grid">
     <div>
       <section class="panel" aria-labelledby="dag19-w">
@@ -303,6 +355,23 @@
     <li><a class="btn btn-ghost ext" href="https://www.google.com/maps/dir/?api=1&amp;origin=Ribeira%20Brava%2C%20Madeira%2C%20Portugal&amp;destination=Ribeiro%20Frio%2C%20Santana%2C%20Madeira%2C%20Portugal&amp;travelmode=driving">Route vanaf Ribeira Brava</a></li>
     <li><a class="btn btn-ghost ext" href="https://www.google.com/maps/search/?api=1&amp;query=Levada%20do%20Rei%2C%20S%C3%A3o%20Jorge%2C%20Madeira%2C%20Portugal">Tweede start: Levada do Rei</a></li>
   </ul>
+  <figure class="mapbox" data-day="dag20">
+    <div class="maphead">
+      <h3 id="dag20-k">Routekaart</h3>
+      <button type="button" class="mapclose" hidden>Sluiten<span class="sr"> volledig scherm</span></button>
+    </div>
+    <div class="map" id="map-dag20" role="region" aria-label="Interactieve kaart met de GPX-route van Balcões en Levada do Rei"><noscript>De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</noscript></div>
+    <div class="maptools">
+      <button type="button" class="mapbtn" data-act="fs" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Volledig scherm</span></button>
+      <button type="button" class="mapbtn" data-act="loc"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Mijn locatie</span></button>
+      <button type="button" class="mapbtn" data-act="fit"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 20 9 9l4 6 2-3 6 8z"/></svg><span>Hele route</span></button>
+    </div>
+    <figcaption>
+      <ul class="legend"></ul>
+      <p class="maphint small muted">Zoom met twee vingers. Tik op <em>Volledig scherm</em> om de kaart vrij te verslepen.</p>
+      <p class="mapstatus small" role="status"></p>
+    </figcaption>
+  </figure>
   <div class="grid">
     <div>
       <section class="panel" aria-labelledby="dag20-w">
@@ -369,6 +438,23 @@
     <li><a class="btn ext" href="https://www.google.com/maps/search/?api=1&amp;query=Parque%20de%20Estacionamento%20Raba%C3%A7al%2C%20ER110%2C%20Calheta%2C%20Madeira%2C%20Portugal">Startpunt op kaart</a></li>
     <li><a class="btn btn-ghost ext" href="https://www.google.com/maps/dir/?api=1&amp;origin=Ribeira%20Brava%2C%20Madeira%2C%20Portugal&amp;destination=Parque%20de%20Estacionamento%20Raba%C3%A7al%2C%20ER110%2C%20Calheta%2C%20Madeira%2C%20Portugal&amp;travelmode=driving">Route vanaf Ribeira Brava</a></li>
   </ul>
+  <figure class="mapbox" data-day="dag21">
+    <div class="maphead">
+      <h3 id="dag21-k">Routekaart</h3>
+      <button type="button" class="mapclose" hidden>Sluiten<span class="sr"> volledig scherm</span></button>
+    </div>
+    <div class="map" id="map-dag21" role="region" aria-label="Interactieve kaart met de GPX-route van Rabaçal"><noscript>De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</noscript></div>
+    <div class="maptools">
+      <button type="button" class="mapbtn" data-act="fs" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Volledig scherm</span></button>
+      <button type="button" class="mapbtn" data-act="loc"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Mijn locatie</span></button>
+      <button type="button" class="mapbtn" data-act="fit"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 20 9 9l4 6 2-3 6 8z"/></svg><span>Hele route</span></button>
+    </div>
+    <figcaption>
+      <ul class="legend"></ul>
+      <p class="maphint small muted">Zoom met twee vingers. Tik op <em>Volledig scherm</em> om de kaart vrij te verslepen.</p>
+      <p class="mapstatus small" role="status"></p>
+    </figcaption>
+  </figure>
   <div class="grid">
     <div>
       <section class="panel" aria-labelledby="dag21-w">
@@ -435,6 +521,23 @@
     <li><a class="btn ext" href="https://www.google.com/maps/search/?api=1&amp;query=Fanal%20Forest%2C%20Porto%20Moniz%2C%20Madeira%2C%20Portugal">Startpunt op kaart</a></li>
     <li><a class="btn btn-ghost ext" href="https://www.google.com/maps/dir/?api=1&amp;origin=Ribeira%20Brava%2C%20Madeira%2C%20Portugal&amp;destination=Fanal%20Forest%2C%20Porto%20Moniz%2C%20Madeira%2C%20Portugal&amp;travelmode=driving">Route vanaf Ribeira Brava</a></li>
   </ul>
+  <figure class="mapbox" data-day="dag22">
+    <div class="maphead">
+      <h3 id="dag22-k">Routekaart</h3>
+      <button type="button" class="mapclose" hidden>Sluiten<span class="sr"> volledig scherm</span></button>
+    </div>
+    <div class="map" id="map-dag22" role="region" aria-label="Interactieve kaart met de GPX-route van Fanal"><noscript>De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</noscript></div>
+    <div class="maptools">
+      <button type="button" class="mapbtn" data-act="fs" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Volledig scherm</span></button>
+      <button type="button" class="mapbtn" data-act="loc"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Mijn locatie</span></button>
+      <button type="button" class="mapbtn" data-act="fit"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 20 9 9l4 6 2-3 6 8z"/></svg><span>Hele route</span></button>
+    </div>
+    <figcaption>
+      <ul class="legend"></ul>
+      <p class="maphint small muted">Zoom met twee vingers. Tik op <em>Volledig scherm</em> om de kaart vrij te verslepen.</p>
+      <p class="mapstatus small" role="status"></p>
+    </figcaption>
+  </figure>
   <div class="grid">
     <div>
       <section class="panel" aria-labelledby="dag22-w">
@@ -596,6 +699,8 @@
   </ul>
 </nav>
 
+<script src="vendor/leaflet/leaflet.js" defer></script>
 <script src="app.js" defer></script>
+<script src="maps.js" defer></script>
 </body>
 </html>
