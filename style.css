@@ -412,3 +412,5 @@ html.map-open .tabbar, html.map-open .daynav { visibility: hidden; }
   .day { break-before: page; }
   a.ext::after { content: " (" attr(href) ")"; font-size: 7pt; word-break: break-all; }
 }
+
+#extra .notice { margin: 0 0 16px; }
