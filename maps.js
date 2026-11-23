@@ -145,7 +145,7 @@
           .bindTooltip('Autorit – ' + d.label + ': ca. ' + d.km.toString().replace('.', ',') + ' km, ' + d.min + ' min', { sticky: true }).addTo(driveGroup);
         var li = document.createElement('li');
         li.innerHTML = '<span class="swatch drive" aria-hidden="true"></span><span class="lname"></span> <span class="lkm muted"></span>';
-        li.querySelector('.lname').textContent = 'Autorit: ' + d.label.toLowerCase();
+        li.querySelector('.lname').textContent = 'Autorit: ' + d.label.charAt(0).toLowerCase() + d.label.slice(1);
         li.querySelector('.lkm').textContent = '· ca. ' + d.km.toString().replace('.', ',') + ' km, ' + d.min + ' min';
         legend.appendChild(li);
       });
