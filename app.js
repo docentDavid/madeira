@@ -1,6 +1,12 @@
 (function () {
   'use strict';
 
+  // Testfunctie: simuleer een datum met ?datum=JJJJ-MM-DD (bijv. ?datum=2026-12-23).
+  function simDate() {
+    var m = /[?&]datum=(\d{4})-(\d{2})-(\d{2})/.exec(location.search);
+    return m ? new Date(+m[1], +m[2] - 1, +m[3]) : new Date();
+  }
+
   // 1. Checklist: bewaar vinkjes lokaal op dit apparaat.
   var PREFIX = 'madeira-2026-';
   var boxes = document.querySelectorAll('input[data-save]');
@@ -21,7 +27,7 @@
   }
 
   // 2. "Vandaag"-melding tijdens de reis.
-  var d = new Date();
+  var d = simDate();
   var today = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   var day = document.querySelector('.day[data-date="' + today + '"]');
   var banner = document.getElementById('vandaag');
@@ -55,7 +61,7 @@
   var tabLinks = Array.prototype.slice.call(document.querySelectorAll('.tabbar a'));
   var tabDagen = document.getElementById('tab-dagen');
   if (day && tabDagen) { tabDagen.setAttribute('href', '#' + day.id); }
-  var sections = ['overzicht', 'dag17', 'dag18', 'dag19', 'dag20', 'dag21', 'dag22', 'checklist', 'extra']
+  var sections = ['overzicht', 'dag17', 'dag18', 'dag19', 'dag20', 'dag21', 'dag22', 'dag23', 'checklist', 'extra']
     .map(function (id) { return document.getElementById(id); }).filter(Boolean);
   function groupOf(id) {
     if (/^dag/.test(id)) { return 'dagen'; }
@@ -80,4 +86,54 @@
   }, { passive: true });
   window.addEventListener('resize', update);
   update();
+
+  // 3b. Aftellen naar de vluchten
+  document.querySelectorAll('[data-flight-date]').forEach(function (el) {
+    var out = el.querySelector('.countdown'); if (!out) { return; }
+    var p = el.getAttribute('data-flight-date').split('-');
+    var flight = new Date(+p[0], +p[1] - 1, +p[2]);
+    var now = simDate(); var t = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var days = Math.round((flight - t) / 86400000);
+    if (days > 1) { out.textContent = 'Nog ' + days + ' dagen.'; }
+    else if (days === 1) { out.textContent = 'Morgen! Check vanavond de vluchtstatus en je instapkaart.'; }
+    else if (days === 0) { out.textContent = 'Vandaag! Check de live vluchtstatus voordat je vertrekt.'; }
+    else { out.textContent = ''; }
+  });
+
+  // 4. Betrouwbaar springen naar een onderdeel. Kaarten die onderweg laden maken de
+  //    pagina langer; daarom controleren we na het scrollen de positie en corrigeren die.
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function padTop() { return parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0; }
+  function jumpTo(target) {
+    target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    var tries = 0, timer = null;
+    function settle() {
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        var off = target.getBoundingClientRect().top - padTop();
+        if (Math.abs(off) > 6 && tries < 5) {
+          tries++;
+          target.scrollIntoView({ behavior: 'auto', block: 'start' });
+          settle();
+        } else {
+          window.removeEventListener('scroll', settle);
+          if (!target.hasAttribute('tabindex')) { target.setAttribute('tabindex', '-1'); }
+          target.focus({ preventScroll: true });
+        }
+      }, 180);
+    }
+    window.addEventListener('scroll', settle, { passive: true });
+    settle();
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) { return; }
+    var id = a.getAttribute('href').slice(1);
+    var target = id === 'top' ? document.body : document.getElementById(id);
+    if (!target) { return; }
+    e.preventDefault();
+    if (location.hash !== '#' + id) { history.pushState(null, '', '#' + id); }
+    if (id === 'top') { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); return; }
+    jumpTo(target);
+  });
 })();

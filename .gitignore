@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# Node: pa11y is globaal geïnstalleerd, de site zelf heeft geen packages nodig.
+node_modules/
+package.json
+package-lock.json
+
+# Geheimen (API-sleutels e.d.) nooit committen
+.env
+.env.*

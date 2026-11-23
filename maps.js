@@ -17,7 +17,8 @@
              extras: [{ src: 'gpx/pr-6-2.gpx', name: 'PR6.2 Levada do Alecrim' },
                       { src: 'gpx/pr-6-3.gpx', name: 'PR6.3 Lagoa do Vento' }] },
     dag22: { tracks: [{ src: 'gpx/fanal.gpx', name: 'Fanal-rondwandeling' }],
-             extras: [{ src: 'gpx/pr-13.gpx', name: 'PR13 Vereda do Fanal (deel)' }] }
+             extras: [{ src: 'gpx/pr-13.gpx', name: 'PR13 Vereda do Fanal (deel)' }] },
+    dag23: { tracks: [] }
   };
   var EXT_COLORS = ['#c2410c', '#0f766e'];
   var DRIVE_COLOR = '#334155';
@@ -148,7 +149,7 @@
         li.querySelector('.lkm').textContent = '· ca. ' + d.km.toString().replace('.', ',') + ' km, ' + d.min + ' min';
         legend.appendChild(li);
       });
-      if (id === 'dag17' && data.places.airport) {
+      if ((id === 'dag17' || id === 'dag23') && data.places.airport) {
         L.marker(data.places.airport.ll, {
           title: 'Luchthaven (autoverhuur)', keyboard: false,
           icon: L.divIcon({ className: 'extmark', html: '<span class="placepin airport" aria-hidden="true">✈</span>', iconSize: [30, 30], iconAnchor: [15, 15] })
@@ -177,7 +178,7 @@
       }
     });
 
-    var walkReady = new Promise(function (res) { walksDone = res; });
+    var walkReady = list.length ? new Promise(function (res) { walksDone = res; }) : Promise.resolve();
     Promise.all([walkReady, dataDone]).then(function () { fitAll(); resolveReady(); });
 
     if (cfg.note) {
@@ -242,7 +243,8 @@
       status.textContent = 'Locatie niet beschikbaar. Geef toestemming voor locatie of probeer het buiten opnieuw.';
     });
 
-    fig.querySelector('[data-act="fit"]').addEventListener('click', fit);
+    var fitBtn = fig.querySelector('[data-act="fit"]');
+    if (fitBtn) { fitBtn.addEventListener('click', fit); }
     fig.querySelector('[data-act="all"]').addEventListener('click', fitAll);
 
     return {
