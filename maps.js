@@ -1,7 +1,24 @@
 /* Interactieve routekaarten per dag (Leaflet + lokale GPX-bestanden). */
 (function () {
   'use strict';
-  if (!window.L) { return; }
+
+  // Leaflet pas laden als er een kaart in beeld komt (scheelt ~150 kB bij het openen van de pagina).
+  var leafletReady = null;
+  function loadLeaflet() {
+    if (window.L) { return Promise.resolve(); }
+    if (leafletReady) { return leafletReady; }
+    leafletReady = new Promise(function (resolve, reject) {
+      var css = document.createElement('link');
+      css.rel = 'stylesheet'; css.href = 'vendor/leaflet/leaflet.css';
+      document.head.appendChild(css);
+      var js = document.createElement('script');
+      js.src = 'vendor/leaflet/leaflet.js';
+      js.onload = function () { resolve(); };
+      js.onerror = function () { leafletReady = null; reject(new Error('Leaflet niet geladen')); };
+      document.head.appendChild(js);
+    });
+    return leafletReady;
+  }
 
   var ROUTES = {
     dag17: { tracks: [{ src: 'gpx/pontadesaolourenco.gpx', name: 'PR8 Ponta de São Lourenço' }],
@@ -27,7 +44,7 @@
     back: { color: '#6d28d9', weight: 5, opacity: 0.95, dash: '2 8', cap: 'round' },
     alt: { color: DRIVE_COLOR, weight: 4, opacity: 0.6, dash: '4 10', cap: 'butt' }
   };
-  var DATA = fetch('data/kaart.json?v=23').then(function (r) { return r.json(); }).catch(function () { return null; });
+  var DATA = fetch('data/kaart.json?v=25').then(function (r) { return r.json(); }).catch(function () { return null; });
   var built = {};
   var PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
   var COLORS = ['#d62828', '#1d4ed8', '#7c3aed'];
@@ -92,7 +109,8 @@
     var walksDone;
     var group = L.featureGroup().addTo(map);
     var sightGroup = L.featureGroup().addTo(map);
-    L.control.layers(layers, { 'Wandelroutes': group, 'Autoritten': driveGroup, 'Bezienswaardigheden': sightGroup }, { position: 'topright' }).addTo(map);
+    var parkGroup = L.featureGroup().addTo(map);
+    L.control.layers(layers, { 'Wandelroutes': group, 'Autoritten': driveGroup, 'Bezienswaardigheden': sightGroup, 'Parkeren': parkGroup }, { position: 'topright' }).addTo(map);
     L.control.scale({ imperial: false }).addTo(map);
     map.attributionControl.setPrefix(false);
     var loaded = 0;
@@ -177,6 +195,25 @@
           icon: L.divIcon({ className: 'extmark', html: '<span class="placepin airport" aria-hidden="true">✈</span>', iconSize: [30, 30], iconAnchor: [15, 15] })
         }).bindTooltip('Luchthaven (autoverhuur)').addTo(driveGroup);
       }
+      ((data.parkingDays && data.parkingDays[id]) || []).forEach(function (key) {
+        (data.parking[key] || []).forEach(function (o) {
+          var box = document.createElement('div'); box.className = 'popup';
+          box.innerHTML = '<strong></strong><p></p><a class="ext" target="_blank" rel="noopener">Navigeer hierheen</a>';
+          box.querySelector('strong').textContent = 'Parkeren: ' + (data.parkingLabels[key] || '');
+          var fee = { gratis: 'Gratis', betaald: 'Betaald', onbekend: 'Betalen onbekend' }[o.fee] || '';
+          box.querySelector('p').textContent = fee + (o.cap ? ' · ca. ' + o.cap + ' plaatsen' : '') + ' · ca. ' + Math.round(o.dist / 10) * 10 + ' m lopen';
+          box.querySelector('a').href = 'https://www.google.com/maps/dir/?api=1&destination=' + o.ll[0] + ',' + o.ll[1] + '&travelmode=driving';
+          L.marker(o.ll, {
+            title: 'Parkeren (' + fee.toLowerCase() + '): ' + (data.parkingLabels[key] || ''), keyboard: false,
+            icon: L.divIcon({ className: 'extmark', html: '<span class="pmark ' + o.fee + '" aria-hidden="true">P</span>', iconSize: [24, 24], iconAnchor: [12, 12], popupAnchor: [0, -10] })
+          }).bindPopup(box, { maxWidth: 210, autoPanPaddingTopLeft: L.point(64, 24), autoPanPaddingBottomRight: L.point(24, 40) }).addTo(parkGroup);
+        });
+      });
+      if ((data.parkingDays || {})[id]) {
+        var pli = document.createElement('li');
+        pli.innerHTML = '<span class="pmark gratis small" aria-hidden="true">P</span><span class="lname">Parkeren (zie lijst onder de kaart)</span>';
+        legend.appendChild(pli);
+      }
       var keys = (data.sights && data.sights[id]) || [];
       keys.forEach(function (key) {
         var pl = data.places[key]; if (!pl) { return; }
@@ -216,7 +253,7 @@
     }
     function fitAll() {
       var b = L.latLngBounds([]);
-      [group, driveGroup, sightGroup].forEach(function (g) { if (map.hasLayer(g) && g.getLayers().length) { b.extend(g.getBounds()); } });
+      [group, driveGroup, sightGroup, parkGroup].forEach(function (g) { if (map.hasLayer(g) && g.getLayers().length) { b.extend(g.getBounds()); } });
       if (b.isValid()) { map.fitBounds(b, FIT); } else { fit(); }
     }
 
@@ -283,7 +320,14 @@
 
   function ensure(fig) {
     var id = fig.getAttribute('data-day');
-    if (!built[id]) { built[id] = build(fig); }
+    if (!built[id]) {
+      built[id] = loadLeaflet().then(function () { return build(fig); }).catch(function () {
+        built[id] = null;
+        var st = fig.querySelector('.mapstatus');
+        if (st) { st.textContent = 'De kaart kon niet worden geladen. Probeer het opnieuw met internet.'; }
+        return null;
+      });
+    }
     return built[id];
   }
 
@@ -295,8 +339,8 @@
     btn.type = 'button'; btn.className = 'showmap';
     btn.innerHTML = PIN + '<span>Toon op routekaart</span>';
     var name = item.querySelector('.stop-name');
-    btn.setAttribute('aria-label', 'Toon ' + (name ? name.firstChild.textContent.trim() : '') + ' op de routekaart');
-    btn.addEventListener('click', function () { ensure(fig).showStop(item.getAttribute('data-stop')); });
+    btn.setAttribute('aria-label', 'Toon op routekaart: ' + (name ? name.firstChild.textContent.trim() : ''));
+    btn.addEventListener('click', function () { ensure(fig).then(function (api) { if (api) { api.showStop(item.getAttribute('data-stop')); } }); });
     item.appendChild(btn);
   });
 

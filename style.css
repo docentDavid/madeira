@@ -419,3 +419,24 @@ html.map-open .tabbar, html.map-open .daynav { visibility: hidden; }
 }
 
 #extra .notice { margin: 0 0 16px; }
+
+.packlist { margin: 0 0 16px; }
+.packlist .grid { margin-top: 8px; }
+.packlist fieldset.checks { background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+
+/* Parking */
+.parking { margin: 0 0 24px; border-left: 5px solid #1d4ed8; }
+.parking h3 { display: flex; align-items: center; gap: 10px; }
+.pbadge, .pmark { display: inline-flex; align-items: center; justify-content: center; flex: none; font-weight: 800; color: #fff; background: #1d4ed8; border-radius: 6px; }
+.pbadge { width: 26px; height: 26px; font-size: .95rem; }
+.pmark { width: 24px; height: 24px; font-size: .8rem; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.4); }
+.pmark.betaald { background: #1e3a8a; }
+.pmark.onbekend { background: #475569; }
+.pmark.small { width: 22px; height: 22px; }
+.popts { list-style: none; margin: 4px 0 0; padding: 0; }
+.popts li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 2px 0; }
+.popts a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+.pfee { display: inline-block; font-size: .8rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); }
+.pfee.gratis { color: var(--link); }
+.pfee.betaald { color: var(--accent); }
+.pfee.onbekend { color: var(--muted); }
