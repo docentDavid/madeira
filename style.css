@@ -440,3 +440,12 @@ html.map-open .tabbar, html.map-open .daynav { visibility: hidden; }
 .pfee.gratis { color: var(--link); }
 .pfee.betaald { color: var(--accent); }
 .pfee.onbekend { color: var(--muted); }
+
+.pline { display: flex; align-items: flex-start; gap: 8px; margin: 6px 0 2px; }
+.pline ul { list-style: none; margin: 0; padding: 0; }
+.pline li { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; }
+.pline a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+.pbadge.sm { width: 22px; height: 22px; font-size: .8rem; margin-top: 2px; }
+.pline > .pbadge.sm { margin-top: 11px; }
+p.pline > .pbadge.sm { margin-top: 2px; }
+.pstart { font-weight: 700; margin: 10px 0 0; }
