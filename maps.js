@@ -22,7 +22,7 @@
   };
   var EXT_COLORS = ['#c2410c', '#0f766e'];
   var DRIVE_COLOR = '#334155';
-  var DATA = fetch('data/kaart.json').then(function (r) { return r.json(); }).catch(function () { return null; });
+  var DATA = fetch('data/kaart.json?v=21').then(function (r) { return r.json(); }).catch(function () { return null; });
   var built = {};
   var PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
   var COLORS = ['#d62828', '#1d4ed8', '#7c3aed'];
@@ -140,8 +140,8 @@
     var dataDone = DATA.then(function (data) {
       if (!data) { return; }
       (data.days[id] || []).forEach(function (d) {
-        L.polyline(d.line, { color: '#fff', weight: 7, opacity: 0.8, interactive: false }).addTo(driveGroup);
-        L.polyline(d.line, { color: DRIVE_COLOR, weight: 4, opacity: 0.9, dashArray: '1 9', lineCap: 'round' })
+        L.polyline(d.line, { color: '#fff', weight: 9, opacity: 0.9, interactive: false }).addTo(driveGroup);
+        L.polyline(d.line, { color: DRIVE_COLOR, weight: 5, opacity: 0.95, dashArray: '10 7', lineCap: 'butt' })
           .bindTooltip('Autorit – ' + d.label + ': ca. ' + d.km.toString().replace('.', ',') + ' km, ' + d.min + ' min', { sticky: true }).addTo(driveGroup);
         var li = document.createElement('li');
         li.innerHTML = '<span class="swatch drive" aria-hidden="true"></span><span class="lname"></span> <span class="lkm muted"></span>';
@@ -149,6 +149,13 @@
         li.querySelector('.lkm').textContent = '· ca. ' + d.km.toString().replace('.', ',') + ' km, ' + d.min + ' min';
         legend.appendChild(li);
       });
+      var usesBase = (data.days[id] || []).some(function (d) { return d.stops.indexOf('ribeirabrava') !== -1; });
+      if (usesBase && data.places.ribeirabrava) {
+        L.marker(data.places.ribeirabrava.ll, {
+          title: 'Ribeira Brava (accommodatie)', keyboard: false,
+          icon: L.divIcon({ className: 'extmark', html: '<span class="placepin airport home" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9H15v-6H9v6H3z"/></svg></span>', iconSize: [30, 30], iconAnchor: [15, 15] })
+        }).bindTooltip('Ribeira Brava (accommodatie)').addTo(driveGroup);
+      }
       if ((id === 'dag17' || id === 'dag23') && data.places.airport) {
         L.marker(data.places.airport.ll, {
           title: 'Luchthaven (autoverhuur)', keyboard: false,
