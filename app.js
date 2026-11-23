@@ -87,6 +87,27 @@
   window.addEventListener('resize', update);
   update();
 
+  // 3c. Licht/donker-schakelaar (keuze wordt op dit apparaat onthouden)
+  var root = document.documentElement;
+  var toggle = document.getElementById('theme-toggle');
+  var meta = document.querySelector('meta[name="theme-color"]');
+  var sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+  function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : sysDark.matches; }
+  function syncTheme() {
+    if (toggle) { toggle.setAttribute('aria-pressed', String(isDark())); }
+    if (meta) { meta.setAttribute('content', isDark() ? '#17332b' : '#1d4d3c'); }
+  }
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('madeira-theme', next); } catch (e) {}
+      syncTheme();
+    });
+  }
+  if (sysDark.addEventListener) { sysDark.addEventListener('change', syncTheme); }
+  syncTheme();
+
   // 4. Betrouwbaar springen naar een onderdeel. Kaarten die onderweg laden maken de
   //    pagina langer; daarom controleren we na het scrollen de positie en corrigeren die.
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

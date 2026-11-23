@@ -1,4 +1,4 @@
-/* Madeira te voet – toegankelijke reisgids */
+/* Madeira – toegankelijke reisgids */
 :root {
   --bg: #f6f3ec;
   --surface: #ffffff;
@@ -21,8 +21,9 @@
   --nav-h: 70px;
   color-scheme: light;
 }
+/* Dark theme: follows the system unless the switch sets data-theme */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #0f1c1a;
     --surface: #172825;
     --surface-2: #1d302c;
@@ -42,6 +43,26 @@
     --hero-2: #0f1c1a;
     color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1c1a;
+  --surface: #172825;
+  --surface-2: #1d302c;
+  --ink: #eef0ea;
+  --muted: #b4c2ba;
+  --line: #2f4540;
+  --brand: #b9e0a5;
+  --brand-ink: #0f1c1a;
+  --link: #b9e0a5;
+  --accent: #f0bf8f;
+  --alt-bg: #16293a;
+  --alt-line: #7fb7dc;
+  --warn-bg: #33261a;
+  --warn-line: #e5a56b;
+  --focus: #8ab4ff;
+  --hero-1: #17332b;
+  --hero-2: #0f1c1a;
+  color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -124,6 +145,18 @@ body::before {
   content: ""; position: fixed; top: 0; left: 0; right: 0; z-index: 25;
   height: env(safe-area-inset-top); background: var(--hero-1); pointer-events: none;
 }
+
+/* Title row + light/dark switch */
+.title-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.title-row h1 { margin-bottom: .2em; }
+.theme-toggle { flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 4px; border: 0; background: none; cursor: pointer; border-radius: 999px; color: #fdfbf5; }
+.tt-track { position: relative; display: inline-flex; align-items: center; justify-content: space-between; width: 68px; height: 36px; padding: 0 8px; border-radius: 999px; background: rgba(255,255,255,.14); border: 1.5px solid rgba(255,255,255,.55); }
+.tt-track svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; position: relative; z-index: 1; }
+.tt-moon { fill: currentColor !important; stroke: none !important; }
+.tt-knob { position: absolute; top: 3px; left: 3px; width: 28px; height: 28px; border-radius: 50%; background: #fdfbf5; box-shadow: 0 1px 3px rgba(0,0,0,.35); }
+.theme-toggle[aria-pressed="true"] .tt-knob { left: 35px; }
+.theme-toggle[aria-pressed="false"] .tt-sun, .theme-toggle[aria-pressed="true"] .tt-moon { color: var(--hero-1); }
+@media (prefers-reduced-motion: no-preference) { .tt-knob { transition: left .2s ease; } }
 
 /* Bottom tab bar (app style) */
 .tabbar {
@@ -354,7 +387,8 @@ html.map-open .tabbar, html.map-open .daynav { visibility: hidden; }
 .placepin.small { width: 22px; height: 22px; flex: none; }
 .placepin.small svg { width: 12px; height: 12px; }
 .swatch.drive { border-top: 5px dotted #334155; }
-@media (prefers-color-scheme: dark) { .swatch.drive { border-top-color: #cbd5e1; } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .swatch.drive { border-top-color: #cbd5e1; } }
+:root[data-theme="dark"] .swatch.drive { border-top-color: #cbd5e1; }
 .popup strong { display: block; font-size: 1rem; margin-bottom: 4px; }
 .popup p { margin: 0 0 6px !important; font-size: .9rem; }
 .popup a { font-weight: 700; }
