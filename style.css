@@ -387,9 +387,13 @@ html.map-open .tabbar, html.map-open .daynav { visibility: hidden; }
 .placepin.small { width: 22px; height: 22px; flex: none; }
 .placepin.small svg { width: 12px; height: 12px; }
 .swatch.drive { border-top: 5px dashed #334155; }
+.swatch.drive.back { border-top: 5px dotted #6d28d9; }
+.swatch.drive.alt { border-top: 4px dashed #334155; opacity: .6; }
 .placepin.home svg { width: 16px; height: 16px; fill: currentColor; stroke: none; transform: none; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .swatch.drive { border-top-color: #cbd5e1; } }
 :root[data-theme="dark"] .swatch.drive { border-top-color: #cbd5e1; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .swatch.drive.back { border-top-color: #c4b5fd; } }
+:root[data-theme="dark"] .swatch.drive.back { border-top-color: #c4b5fd; }
 .popup strong { display: block; font-size: 1rem; margin-bottom: 4px; }
 .popup p { margin: 0 0 6px !important; font-size: .9rem; }
 .popup a { font-weight: 700; }

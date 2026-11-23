@@ -22,7 +22,12 @@
   };
   var EXT_COLORS = ['#c2410c', '#0f766e'];
   var DRIVE_COLOR = '#334155';
-  var DATA = fetch('data/kaart.json?v=21').then(function (r) { return r.json(); }).catch(function () { return null; });
+  var DRIVE_STYLE = {
+    go: { color: DRIVE_COLOR, weight: 5, opacity: 0.95, dash: '10 7', cap: 'butt' },
+    back: { color: '#6d28d9', weight: 5, opacity: 0.95, dash: '2 8', cap: 'round' },
+    alt: { color: DRIVE_COLOR, weight: 4, opacity: 0.6, dash: '4 10', cap: 'butt' }
+  };
+  var DATA = fetch('data/kaart.json?v=23').then(function (r) { return r.json(); }).catch(function () { return null; });
   var built = {};
   var PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
   var COLORS = ['#d62828', '#1d4ed8', '#7c3aed'];
@@ -140,15 +145,25 @@
     var dataDone = DATA.then(function (data) {
       if (!data) { return; }
       (data.days[id] || []).forEach(function (d) {
-        L.polyline(d.line, { color: '#fff', weight: 9, opacity: 0.9, interactive: false }).addTo(driveGroup);
-        L.polyline(d.line, { color: DRIVE_COLOR, weight: 5, opacity: 0.95, dashArray: '10 7', lineCap: 'butt' })
-          .bindTooltip('Autorit – ' + d.label + ': ca. ' + d.km.toString().replace('.', ',') + ' km, ' + d.min + ' min', { sticky: true }).addTo(driveGroup);
+        var kind = d.alt ? 'alt' : (/^Terugrit/.test(d.label) ? 'back' : 'go');
+        var st = DRIVE_STYLE[kind];
+        L.polyline(d.line, { color: '#fff', weight: kind === 'alt' ? 7 : 9, opacity: kind === 'alt' ? 0.6 : 0.9, interactive: false }).addTo(driveGroup);
+        L.polyline(d.line, { color: st.color, weight: st.weight, opacity: st.opacity, dashArray: st.dash, lineCap: st.cap })
+          .bindTooltip((d.alt ? 'Optie – ' : 'Autorit – ') + d.label + ': ca. ' + d.km.toString().replace('.', ',') + ' km, ' + d.min + ' min', { sticky: true }).addTo(driveGroup);
         var li = document.createElement('li');
-        li.innerHTML = '<span class="swatch drive" aria-hidden="true"></span><span class="lname"></span> <span class="lkm muted"></span>';
-        li.querySelector('.lname').textContent = 'Autorit: ' + d.label.charAt(0).toLowerCase() + d.label.slice(1);
+        li.innerHTML = '<span class="swatch drive ' + kind + '" aria-hidden="true"></span><span class="lname"></span> <span class="lkm muted"></span>';
+        li.querySelector('.lname').textContent = (d.alt ? 'Optie: ' : 'Autorit: ') + d.label.charAt(0).toLowerCase() + d.label.slice(1);
         li.querySelector('.lkm').textContent = '· ca. ' + d.km.toString().replace('.', ',') + ' km, ' + d.min + ' min';
         legend.appendChild(li);
       });
+      if (data.routeNotes && data.routeNotes[id]) {
+        var rn = document.createElement('p');
+        rn.className = 'mapnote routenote';
+        rn.innerHTML = '<strong>Heen en terug:</strong> ';
+        rn.appendChild(document.createTextNode(data.routeNotes[id]));
+        var hint = fig.querySelector('.maphint');
+        hint.parentNode.insertBefore(rn, hint);
+      }
       var usesBase = (data.days[id] || []).some(function (d) { return d.stops.indexOf('ribeirabrava') !== -1; });
       if (usesBase && data.places.ribeirabrava) {
         L.marker(data.places.ribeirabrava.ll, {
