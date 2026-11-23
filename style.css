@@ -17,9 +17,6 @@
   --focus: #0b57d0;
   --hero-1: #1d4d3c;
   --hero-2: #15352b;
-  --m1: #f6f3ec;
-  --m2: #2c6a52;
-  --m3: #3f7d62;
   --radius: 14px;
   --nav-h: 70px;
   color-scheme: light;
@@ -43,9 +40,6 @@
     --focus: #8ab4ff;
     --hero-1: #17332b;
     --hero-2: #0f1c1a;
-    --m1: #0f1c1a;
-    --m2: #1f3f35;
-    --m3: #2a5345;
     color-scheme: dark;
   }
 }
@@ -89,14 +83,9 @@ main:focus { outline: none; }
   position: relative; overflow: hidden;
   background: var(--hero-1);
   color: #fdfbf5;
-  padding: 48px 0 0;
+  padding: 48px 0 32px;
 }
 .hero-inner { position: relative; z-index: 1; }
-.hero-art { display: block; width: 100%; height: 64px; margin-top: 4px; margin-bottom: -1px; }
-@media (min-width: 800px) { .hero-art { height: 96px; } }
-.hero-art .m1 { fill: var(--m1); }
-.hero-art .m2 { fill: var(--m2); opacity: .9; }
-.hero-art .m3 { fill: var(--m3); opacity: .6; }
 .hero .eyebrow { color: #e3c98f; }
 .hero h1 { font-size: clamp(2.6rem, 11vw, 5rem); font-weight: 800; letter-spacing: -.03em; margin: .15em 0 .3em; }
 .hero h1 span { display: block; font-weight: 500; font-size: .5em; letter-spacing: -.01em; color: #dfe9d9; }
@@ -168,8 +157,7 @@ body { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
   .tabbar { display: block; }
   body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
   .install, .skip { display: none; }
-  .hero { padding: calc(20px + env(safe-area-inset-top)) 0 0; }
-  .hero-art { height: 44px; }
+  .hero { padding: calc(20px + env(safe-area-inset-top)) 0 24px; }
   .hero h1 { font-size: 2.6rem; }
   .lede { font-size: 1rem; }
   .foot { margin-top: 32px; }
@@ -381,7 +369,7 @@ html.map-open .tabbar, html.map-open .daynav { visibility: hidden; }
 
 /* Print */
 @media print {
-  .daynav, .tabbar, .skip, .actions, #reset, .today, .hero-art { display: none !important; }
+  .daynav, .tabbar, .skip, .actions, #reset, .today { display: none !important; }
   body { background: #fff; color: #000; font-size: 10.5pt; }
   .hero { background: none; color: #000; padding: 0 0 12px; }
   .hero .eyebrow, .hero h1 span, .lede { color: #000; }
