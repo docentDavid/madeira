@@ -1,5 +1,5 @@
 // Service worker: maakt de reisgids volledig offline bruikbaar.
-var CACHE = 'madeira-v26';
+var CACHE = 'madeira-v27';
 var TILES = 'madeira-tiles';
 var MAX_TILES = 4000;
 var trimming = false;
