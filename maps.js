@@ -183,7 +183,7 @@
 
     if (cfg.note) {
       var n = document.createElement('p');
-      n.className = 'small muted';
+      n.className = 'mapnote';
       n.textContent = cfg.note;
       legend.parentNode.insertBefore(n, legend.nextSibling);
     }

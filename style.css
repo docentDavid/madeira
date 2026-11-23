@@ -197,7 +197,7 @@ body { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 }
 
 .offline { margin: 16px 0 0; padding: 12px 16px; border-radius: 12px; background: var(--alt-bg); border-left: 5px solid var(--alt-line); font-weight: 600; }
-.install { margin-top: 16px; }
+.install { margin: 0 0 16px; }
 .install .notice-title { font-size: 1.15rem; }
 
 /* Today banner + notice */
@@ -348,7 +348,7 @@ td a { display: inline-block; padding: 4px 0; font-weight: 600; }
 .swatch { display: inline-block; width: 28px; height: 0; border-top: 5px solid var(--c); border-radius: 3px; }
 .swatch.dashed { border-top-style: dashed; }
 .lkm { font-weight: 400; }
-.maphint, .mapstatus { margin: 4px 0 0; }
+.maphint, .mapstatus, .mapnote { margin: 8px 0 0; }
 .mapstatus:empty { display: none; }
 .mapclose { min-height: 44px; padding: 0 16px; border-radius: 999px; border: 2px solid var(--link); background: transparent; color: var(--link); font: inherit; font-weight: 700; cursor: pointer; }
 
