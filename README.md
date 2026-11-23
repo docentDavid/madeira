@@ -8,4 +8,4 @@ Statische site (HTML/CSS/JS) met een service worker voor offline gebruik, gehost
 
 - Toegankelijkheid (pa11y is globaal geïnstalleerd, er zijn geen lokale packages nodig):
   `pa11y https://docentdavid.github.io/madeira/` en `pa11y --runner axe https://docentdavid.github.io/madeira/`
-- Datum simuleren (banner "Vandaag", aftellen naar de vlucht): voeg `?datum=2026-12-23` toe aan de URL.
+- Datum simuleren (banner "Vandaag", tab Dagen): voeg `?datum=2026-12-23` toe aan de URL.

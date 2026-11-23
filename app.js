@@ -87,19 +87,6 @@
   window.addEventListener('resize', update);
   update();
 
-  // 3b. Aftellen naar de vluchten
-  document.querySelectorAll('[data-flight-date]').forEach(function (el) {
-    var out = el.querySelector('.countdown'); if (!out) { return; }
-    var p = el.getAttribute('data-flight-date').split('-');
-    var flight = new Date(+p[0], +p[1] - 1, +p[2]);
-    var now = simDate(); var t = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    var days = Math.round((flight - t) / 86400000);
-    if (days > 1) { out.textContent = 'Nog ' + days + ' dagen.'; }
-    else if (days === 1) { out.textContent = 'Morgen! Check vanavond de vluchtstatus en je instapkaart.'; }
-    else if (days === 0) { out.textContent = 'Vandaag! Check de live vluchtstatus voordat je vertrekt.'; }
-    else { out.textContent = ''; }
-  });
-
   // 4. Betrouwbaar springen naar een onderdeel. Kaarten die onderweg laden maken de
   //    pagina langer; daarom controleren we na het scrollen de positie en corrigeren die.
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -9,3 +9,6 @@ package-lock.json
 # Geheimen (API-sleutels e.d.) nooit committen
 .env
 .env.*
+
+# Lokale tool-instellingen
+.claude/
