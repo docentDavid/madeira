@@ -87,12 +87,12 @@ main:focus { outline: none; }
 /* Hero */
 .hero {
   position: relative; overflow: hidden;
-  background: linear-gradient(165deg, var(--hero-1), var(--hero-2));
+  background: var(--hero-1);
   color: #fdfbf5;
-  padding: 48px 0 110px;
+  padding: 48px 0 0;
 }
 .hero-inner { position: relative; z-index: 1; }
-.hero-art { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 140px; }
+.hero-art { display: block; width: 100%; height: 120px; margin-top: 12px; margin-bottom: -1px; }
 .hero-art .m1 { fill: var(--m1); }
 .hero-art .m2 { fill: var(--m2); opacity: .9; }
 .hero-art .m3 { fill: var(--m3); opacity: .6; }
@@ -162,7 +162,7 @@ body { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
   .tabbar { display: block; }
   body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
   .install, .skip { display: none; }
-  .hero { padding: calc(20px + env(safe-area-inset-top)) 0 70px; }
+  .hero { padding: calc(20px + env(safe-area-inset-top)) 0 0; }
   .hero-art { height: 80px; }
   .hero h1 { font-size: 2.6rem; }
   .lede { font-size: 1rem; }
@@ -341,7 +341,7 @@ html.map-open .tabbar, html.map-open .daynav { visibility: hidden; }
 /* Extensions */
 .extnum { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--c); color: #fff; font-weight: 800; font-size: .85rem; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.35); }
 .extmark { background: none; border: 0; }
-.extras { margin: 0 0 24px; border-left: 5px solid #ea580c; }
+.extras { margin: 0 0 24px; border-left: 5px solid #c2410c; }
 .extlist { list-style: none; margin: 0; padding: 0; }
 .extlist > li { padding: 14px 0; border-top: 1px solid var(--line); }
 .extlist > li:first-child { border-top: 0; padding-top: 4px; }

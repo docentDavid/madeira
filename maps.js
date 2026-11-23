@@ -19,7 +19,7 @@
     dag22: { tracks: [{ src: 'gpx/fanal.gpx', name: 'Fanal-rondwandeling' }],
              extras: [{ src: 'gpx/pr-13.gpx', name: 'PR13 Vereda do Fanal (deel)' }] }
   };
-  var EXT_COLORS = ['#ea580c', '#0d9488'];
+  var EXT_COLORS = ['#c2410c', '#0f766e'];
   var DRIVE_COLOR = '#334155';
   var DATA = fetch('data/kaart.json').then(function (r) { return r.json(); }).catch(function () { return null; });
   var built = {};
