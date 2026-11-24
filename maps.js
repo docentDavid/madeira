@@ -44,7 +44,7 @@
     back: { color: '#6d28d9', weight: 5, opacity: 0.95, dash: '2 8', cap: 'round' },
     alt: { color: DRIVE_COLOR, weight: 4, opacity: 0.6, dash: '4 10', cap: 'butt' }
   };
-  var DATA = fetch('data/kaart.json?v=25').then(function (r) { return r.json(); }).catch(function () { return null; });
+  var DATA = fetch('data/kaart.json?v=28').then(function (r) { return r.json(); }).catch(function () { return null; });
   var built = {};
   var PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
   var COLORS = ['#d62828', '#1d4ed8', '#7c3aed'];
@@ -211,7 +211,7 @@
       });
       if ((data.parkingDays || {})[id]) {
         var pli = document.createElement('li');
-        pli.innerHTML = '<span class="pmark gratis small" aria-hidden="true">P</span><span class="lname">Parkeren (zie lijst onder de kaart)</span>';
+        pli.innerHTML = '<span class="pmark gratis small" aria-hidden="true">P</span><span class="lname">Parkeren (zie bij elke plek)</span>';
         legend.appendChild(pli);
       }
       var keys = (data.sights && data.sights[id]) || [];
