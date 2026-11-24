@@ -389,6 +389,9 @@ html.map-open .tabbar, html.map-open .daynav { visibility: hidden; }
 .swatch.drive { border-top: 5px dashed #334155; }
 .swatch.drive.back { border-top: 5px dotted #6d28d9; }
 .swatch.drive.alt { border-top: 4px dashed #334155; opacity: .6; }
+.placepin.fuel { background: #b91c1c; }
+.placepin.fuel svg { width: 16px; height: 16px; transform: none; fill: none; stroke: currentColor; stroke-width: 2; }
+.placepin.fuel.small svg { width: 12px; height: 12px; }
 .placepin.home svg { width: 16px; height: 16px; fill: currentColor; stroke: none; transform: none; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .swatch.drive { border-top-color: #cbd5e1; } }
 :root[data-theme="dark"] .swatch.drive { border-top-color: #cbd5e1; }

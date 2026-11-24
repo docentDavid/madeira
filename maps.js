@@ -44,8 +44,9 @@
     back: { color: '#6d28d9', weight: 5, opacity: 0.95, dash: '2 8', cap: 'round' },
     alt: { color: DRIVE_COLOR, weight: 4, opacity: 0.6, dash: '4 10', cap: 'butt' }
   };
-  var DATA = fetch('data/kaart.json?v=28').then(function (r) { return r.json(); }).catch(function () { return null; });
+  var DATA = fetch('data/kaart.json?v=30').then(function (r) { return r.json(); }).catch(function () { return null; });
   var built = {};
+  var FUEL = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16H4zM6 6v4h7V6H6zM15 9h2a2 2 0 0 1 2 2v6a1 1 0 0 0 2 0V8l-3-3"/></svg>';
   var PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
   var COLORS = ['#d62828', '#1d4ed8', '#7c3aed'];
   var touch = window.matchMedia('(pointer: coarse)').matches;
@@ -194,6 +195,22 @@
           title: 'Luchthaven (autoverhuur)', keyboard: false,
           icon: L.divIcon({ className: 'extmark', html: '<span class="placepin airport" aria-hidden="true">✈</span>', iconSize: [30, 30], iconAnchor: [15, 15] })
         }).bindTooltip('Luchthaven (autoverhuur)').addTo(driveGroup);
+      }
+      var fuel = data.fuel && data.fuel[id];
+      if (fuel) {
+        var fbox = document.createElement('div'); fbox.className = 'popup';
+        fbox.innerHTML = '<strong></strong><p></p><a class="ext" target="_blank" rel="noopener">Navigeer</a>';
+        fbox.querySelector('strong').textContent = 'Tanken: ' + fuel.name;
+        fbox.querySelector('p').textContent = fuel.info;
+        fbox.querySelector('a').href = 'https://www.google.com/maps/dir/?api=1&destination=' + fuel.ll[0] + ',' + fuel.ll[1] + '&travelmode=driving';
+        L.marker(fuel.ll, {
+          title: 'Tanken: ' + fuel.name, keyboard: false, riseOnHover: true,
+          icon: L.divIcon({ className: 'extmark', html: '<span class="placepin airport fuel" aria-hidden="true">' + FUEL + '</span>', iconSize: [30, 30], iconAnchor: [15, 15], popupAnchor: [0, -14] })
+        }).bindPopup(fbox, { maxWidth: 210 }).bindTooltip('Tanken: ' + fuel.name, { direction: 'top', offset: [0, -14] }).addTo(driveGroup);
+        var fli = document.createElement('li');
+        fli.innerHTML = '<span class="placepin airport fuel small" aria-hidden="true">' + FUEL + '</span><span class="lname"></span>';
+        fli.querySelector('.lname').textContent = 'Tankstation: ' + fuel.name;
+        legend.appendChild(fli);
       }
       ((data.parkingDays && data.parkingDays[id]) || []).forEach(function (key) {
         (data.parking[key] || []).forEach(function (o) {
