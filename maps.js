@@ -237,7 +237,8 @@
         var item = document.querySelector('#' + id + ' [data-stop="' + key + '"]');
         var desc = item ? (item.querySelector('.stop-name + p') || {}).textContent || '' : '';
         var link = item ? item.querySelector('a.ext') : null;
-        var html = '<strong></strong><p></p>' + (link ? '<a class="ext" target="_blank" rel="noopener">Open in Google Maps</a>' : '');
+        var nav = link && /^Navigeer/.test(link.textContent.trim());
+        var html = '<strong></strong><p></p>' + (link ? '<a class="ext" target="_blank" rel="noopener">' + (nav ? 'Navigeer naar parkeerplaats' : 'Open in Google Maps') + '</a>' : '');
         var box = document.createElement('div'); box.className = 'popup'; box.innerHTML = html;
         box.querySelector('strong').textContent = pl.name;
         box.querySelector('p').textContent = desc;

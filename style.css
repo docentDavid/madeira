@@ -268,6 +268,8 @@ a.gpx::after { content: "↓ GPX" / ""; display: inline-block; margin-left: .45e
 .grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
 @media (min-width: 860px) { .grid { grid-template-columns: 1.1fr .9fr; gap: 20px; } }
 .grid > div { display: flex; flex-direction: column; gap: 16px; }
+.daytop { margin: 0 0 24px; }
+@media (max-width: 859px) { .daytop > div:last-child { order: -1; } }
 
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
 .panel > :last-child { margin-bottom: 0; }
