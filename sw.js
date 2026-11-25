@@ -1,5 +1,5 @@
 // Service worker: maakt de reisgids volledig offline bruikbaar.
-var CACHE = 'madeira-v31';
+var CACHE = 'madeira-v32';
 var TILES = 'madeira-tiles';
 var MAX_TILES = 4000;
 var trimming = false;
@@ -11,7 +11,7 @@ function trimTiles(c) {
     return Promise.all(keys.slice(0, Math.max(0, extra)).map(function (k) { return c.delete(k); }));
   }).then(function () { trimming = false; }, function () { trimming = false; });
 }
-var FILES = ['./', 'index.html', 'style.css', 'app.js', 'maps.js', 'data/kaart.json', 'vendor/leaflet/leaflet.js', 'vendor/leaflet/leaflet.css', 'vendor/leaflet/images/layers.png', 'vendor/leaflet/images/layers-2x.png', 'vendor/leaflet/images/marker-icon.png', 'vendor/leaflet/images/marker-icon-2x.png', 'vendor/leaflet/images/marker-shadow.png', 'icon.svg', 'icon-180.png', 'icon-192.png', 'icon-512.png', 'manifest.webmanifest', 'Madeira_reisgids_17-23_december_2026.pdf',
+var FILES = ['./', 'index.html', 'style.css', 'app.js', 'maps.js', 'data/kaart.json', 'vendor/leaflet/leaflet.js', 'vendor/leaflet/leaflet.css', 'vendor/leaflet/images/layers.png', 'vendor/leaflet/images/layers-2x.png', 'vendor/leaflet/images/marker-icon.png', 'vendor/leaflet/images/marker-icon-2x.png', 'vendor/leaflet/images/marker-shadow.png', 'icon.svg', 'icon-180.png', 'icon-192.png', 'icon-512.png', 'manifest.webmanifest',
   'gpx/fanal.gpx', 'gpx/levadadorei.gpx', 'gpx/pontadesaolourenco.gpx', 'gpx/pr-1-tot-pedra-rija.gpx', 'gpx/uitbreiding-pico-do-furado.gpx', 'gpx/uitbreiding-caldeirao-do-inferno.gpx', 'gpx/pr-13.gpx', 'gpx/pr-15.gpx', 'gpx/pr-5.gpx', 'gpx/pr-6-2.gpx', 'gpx/pr-6-3.gpx', 'gpx/queimadascaldeiraoverde.gpx', 'gpx/rabacal25fontesrisco.gpx', 'gpx/veredadopicoruivo.gpx', 'gpx/veredadosbalcoes.gpx'];
 
 self.addEventListener('install', function (e) {
