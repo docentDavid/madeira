@@ -2,13 +2,11 @@
 
 Een overzicht van tools om een website of Progressive Web App (PWA) te controleren op toegankelijkheid, snelheid, kwaliteit en beveiliging. Per tool staat wat hij doet en wanneer je hem gebruikt.
 
-Deze reisgids is getest met **pa11y**, **axe**, **WAVE** en **Lighthouse**. De tools hieronder vullen die aan.
-
 > **Let op:** automatische tools vinden maar een deel van de toegankelijkheidsproblemen (ongeveer 30–40%). Handmatig testen met toetsenbord en screenreader blijft nodig.
 
 ## Inhoud
 
-1. [Al gebruikt in dit project](#1-al-gebruikt-in-dit-project)
+1. [De basis](#1-de-basis)
 2. [Toegankelijkheid](#2-toegankelijkheid)
 3. [Prestaties en PWA](#3-prestaties-en-pwa)
 4. [Code, HTML en beveiliging](#4-code-html-en-beveiliging)
@@ -19,11 +17,13 @@ Deze reisgids is getest met **pa11y**, **axe**, **WAVE** en **Lighthouse**. De t
 
 ---
 
-## 1. Al gebruikt in dit project
+## 1. De basis
+
+Met deze vier tools begin je. Ze vullen elkaar aan: elke tool vindt net andere problemen.
 
 | Tool | Waarvoor | Hoe |
 |---|---|---|
-| [pa11y](https://pa11y.org/) | Toegankelijkheid testen vanaf de terminal, standaard met de regels van HTML_CodeSniffer (WCAG 2). | `npm install -g pa11y`<br>`pa11y https://docentdavid.github.io/madeira/` |
+| [pa11y](https://pa11y.org/) | Toegankelijkheid testen vanaf de terminal, standaard met de regels van HTML_CodeSniffer (WCAG 2). | `npm install -g pa11y`<br>`pa11y https://example.com/` |
 | [axe-core](https://github.com/dequelabs/axe-core) | De meest gebruikte regelset voor toegankelijkheid. Zit ook in Lighthouse en in de browserextensie *axe DevTools*. | `pa11y --runner axe <url>` |
 | [WAVE](https://wave.webaim.org/) | Laat fouten en aandachtspunten zien als icoontjes óp de pagina. Ook handig voor de kopstructuur en de leesvolgorde. | Plak de URL op de site, of gebruik de browserextensie. |
 | [Lighthouse](https://developer.chrome.com/docs/lighthouse) | Scores voor Performance, Accessibility, Best Practices en SEO. | Chrome DevTools → tab *Lighthouse*, of `npm install -g lighthouse` en dan `lighthouse <url> --form-factor=mobile` |
@@ -63,7 +63,7 @@ Deze reisgids is getest met **pa11y**, **axe**, **WAVE** en **Lighthouse**. De t
 | **Chrome DevTools → Application** | De service worker, de cache, het manifest en de opslag bekijken. Met *Offline* aan test je offline gebruik. | Bij elke PWA. |
 | **Chrome DevTools → Network en Performance** | Trage netwerken nabootsen, laadtijd en blokkerende scripts analyseren. | Bij het optimaliseren van de snelheid. |
 | [PWABuilder](https://www.pwabuilder.com/) (Microsoft) | Beoordeelt het manifest en de service worker, en kan app-pakketten maken voor de Play Store, Microsoft Store en App Store. | Om je PWA compleet te maken of te publiceren. |
-| [Workbox](https://developer.chrome.com/docs/workbox) (Google) | Bibliotheek met kant-en-klare cacheregels voor service workers. | Bij grotere PWA's. Een kleine site kan prima met een eigen `sw.js`, zoals deze reisgids. |
+| [Workbox](https://developer.chrome.com/docs/workbox) (Google) | Bibliotheek met kant-en-klare cacheregels voor service workers. | Bij grotere PWA's. Voor een kleine site volstaat vaak een eigen, korte `sw.js`. |
 | [Squoosh](https://squoosh.app/) | Afbeeldingen verkleinen en omzetten naar WebP of AVIF. | Bij elke afbeelding die je online zet. |
 
 ---
@@ -77,7 +77,7 @@ Deze reisgids is getest met **pa11y**, **axe**, **WAVE** en **Lighthouse**. De t
 | [ESLint](https://eslint.org/) | Vindt fouten en slordigheden in JavaScript. | Tijdens het programmeren, in je editor. |
 | [Stylelint](https://stylelint.io/) | Vindt fouten en slordigheden in CSS. | Tijdens het programmeren, in je editor. |
 | [Prettier](https://prettier.io/) | Maakt de opmaak van de code automatisch gelijk. | In teams, zodat iedereen dezelfde stijl gebruikt. |
-| [linkinator](https://github.com/JustinBeckwith/linkinator) | Zoekt kapotte links, zowel interne als externe. | Bij sites met veel externe links. `npx linkinator <url>` |
+| [linkinator](https://github.com/JustinBeckwith/linkinator) | Zoekt kapotte links, zowel interne als externe. | Bij sites met veel (externe) links. `npx linkinator <url>` |
 | [Mozilla HTTP Observatory](https://developer.mozilla.org/en-US/observatory) | Controleert de beveiligingsheaders, zoals Content-Security-Policy en HSTS. | Vóór je een site live zet. |
 | [securityheaders.com](https://securityheaders.com/) | Snel overzicht van de beveiligingsheaders, met een cijfer. | Als snelle controle. |
 | [SSL Labs](https://www.ssllabs.com/ssltest/) | Controleert de HTTPS-instellingen van de server. | Bij een eigen server of domein. |
@@ -102,9 +102,9 @@ Voorbeeld met Playwright en axe:
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-test('kaart in groot scherm is toegankelijk', async ({ page }) => {
-  await page.goto('https://docentdavid.github.io/madeira/#dag18');
-  await page.getByRole('button', { name: 'Groot scherm' }).first().click();
+test('geopend menu is toegankelijk', async ({ page }) => {
+  await page.goto('https://example.com/');
+  await page.getByRole('button', { name: 'Menu' }).click();
   const results = await new AxeBuilder({ page }).analyze();
   expect(results.violations).toEqual([]);
 });
