@@ -260,6 +260,10 @@ a.gpx::after { content: "↓ GPX" / ""; display: inline-block; margin-left: .45e
 .facts div { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
 .facts dt { font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .facts dd { margin: 2px 0 0; font-weight: 600; line-height: 1.35; }
+.facts .weer { grid-column: 1 / -1; }
+.wx, .wx-warn, .wx-note { display: block; }
+.wx-warn { margin-top: 4px; font-weight: 700; }
+.wx-note { margin-top: 4px; font-size: .85rem; font-weight: 400; color: var(--muted); }
 
 .actions { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 10px; }
 .actions .btn { width: 100%; }

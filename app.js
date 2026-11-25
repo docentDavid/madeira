@@ -108,6 +108,78 @@
   if (sysDark.addEventListener) { sysDark.addEventListener('change', syncTheme); }
   syncTheme();
 
+  // 3c. Weer per dag. Ligt de dag binnen 16 dagen, dan halen we de verwachting op bij
+  //     Open-Meteo (gratis, zonder sleutel). Anders blijft het normaal voor de tijd van het
+  //     jaar staan. De laatste verwachting wordt bewaard, zodat hij ook offline zichtbaar is.
+  var WX_KEY = 'madeira-weer', WX_MAXAGE = 3 * 3600 * 1000;
+  var WX_CODES = {
+    0: 'Onbewolkt', 1: 'Overwegend helder', 2: 'Halfbewolkt', 3: 'Bewolkt', 45: 'Mist', 48: 'Mist met rijp',
+    51: 'Lichte motregen', 53: 'Motregen', 55: 'Dichte motregen', 56: 'IJzel', 57: 'IJzel',
+    61: 'Lichte regen', 63: 'Regen', 65: 'Zware regen', 66: 'IJzel', 67: 'IJzel',
+    71: 'Lichte sneeuw', 73: 'Sneeuw', 75: 'Zware sneeuw', 77: 'Sneeuwkorrels',
+    80: 'Lichte buien', 81: 'Buien', 82: 'Zware buien', 85: 'Sneeuwbuien', 86: 'Zware sneeuwbuien',
+    95: 'Onweer', 96: 'Onweer met hagel', 99: 'Onweer met hagel'
+  };
+  var wxEls = Array.prototype.slice.call(document.querySelectorAll('[data-weer]'));
+  var wxToday = new Date(); wxToday.setHours(0, 0, 0, 0);
+  function wxDays(iso) { var p = iso.split('-'); return Math.round((new Date(+p[0], +p[1] - 1, +p[2]) - wxToday) / 86400000); }
+  function wxTime(t) { return new Date(t).toLocaleString('nl-NL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); }
+  function wxRender(cache) {
+    wxEls.forEach(function (el) {
+      var day = cache.days[el.getAttribute('data-weer')];
+      if (!day || day.date !== el.getAttribute('data-date')) { return; }
+      var dd = el.querySelector('dd');
+      var main = document.createElement('span'); main.className = 'wx';
+      main.textContent = 'Verwachting: ' + (WX_CODES[day.code] || 'Wisselend') + ', ' + Math.round(day.tmin) + '–' + Math.round(day.tmax) + ' °C, ' +
+        (day.pp == null ? '' : day.pp + '% kans op regen, ') + 'windstoten tot ' + Math.round(day.gust) + ' km/u.';
+      var warn = [];
+      if (day.code >= 95) { warn.push('Onweer verwacht: niet de bergen in.'); }
+      if (day.gust >= 60) { warn.push('Harde windstoten: vermijd bergkammen en kliffen.'); }
+      if (day.tmin <= 1) { warn.push('Kans op vorst en gladde paden.'); }
+      var note = document.createElement('span'); note.className = 'wx-note';
+      note.textContent = 'Open-Meteo, bijgewerkt ' + wxTime(cache.t) + '. Check op de dag zelf ook de waarschuwingen van IPMA.';
+      dd.textContent = '';
+      dd.appendChild(main);
+      if (warn.length) { var w = document.createElement('span'); w.className = 'wx-warn'; w.textContent = warn.join(' '); dd.appendChild(w); }
+      dd.appendChild(note);
+    });
+  }
+  // Voorbije dagen: de zin "verschijnt hier vanaf …" klopt dan niet meer.
+  wxEls.forEach(function (el) {
+    if (wxDays(el.getAttribute('data-date')) < 0) {
+      var n = el.querySelector('.wx-note'); if (n) { n.textContent = n.textContent.replace(/ De weersverwachting.*$/, ''); }
+    }
+  });
+  var wxDue = wxEls.filter(function (el) { var n = wxDays(el.getAttribute('data-date')); return n >= 0 && n <= 15; });
+  if (wxDue.length) {
+    var wxCache = null;
+    try { wxCache = JSON.parse(localStorage.getItem(WX_KEY)); } catch (e) {}
+    if (wxCache && wxCache.days) { wxRender(wxCache); }
+    if (!(wxCache && Date.now() - wxCache.t < WX_MAXAGE) && navigator.onLine !== false) {
+      var lats = wxDue.map(function (el) { return el.getAttribute('data-lat'); }).join(',');
+      var lons = wxDue.map(function (el) { return el.getAttribute('data-lon'); }).join(',');
+      fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lats + '&longitude=' + lons +
+        '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_gusts_10m_max' +
+        '&timezone=Atlantic%2FMadeira&forecast_days=16')
+        .then(function (r) { if (!r.ok) { throw new Error(r.status); } return r.json(); })
+        .then(function (json) {
+          var list = Array.isArray(json) ? json : [json];
+          var cache = { t: Date.now(), days: {} };
+          wxDue.forEach(function (el, i) {
+            var d = list[i] && list[i].daily; if (!d) { return; }
+            var k = d.time.indexOf(el.getAttribute('data-date')); if (k < 0) { return; }
+            cache.days[el.getAttribute('data-weer')] = {
+              date: d.time[k], code: d.weather_code[k], tmax: d.temperature_2m_max[k], tmin: d.temperature_2m_min[k],
+              pp: d.precipitation_probability_max[k], gust: d.wind_gusts_10m_max[k]
+            };
+          });
+          try { localStorage.setItem(WX_KEY, JSON.stringify(cache)); } catch (e) {}
+          wxRender(cache);
+        })
+        .catch(function () {});
+    }
+  }
+
   // 4. Betrouwbaar springen naar een onderdeel. Kaarten die onderweg laden maken de
   //    pagina langer; daarom controleren we na het scrollen de positie en corrigeren die.
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
