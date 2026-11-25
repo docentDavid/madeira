@@ -1,20 +1,33 @@
 <!doctype html>
 <html lang="nl">
 <head>
+<!-- Basis -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Madeira – reisgids 17-23 december 2026</title>
 <meta name="description" content="Wandelreisgids Madeira 17-23 december 2026: zes dagplannen met routes, GPX-links, uitzichtpunten, alternatieven en een checklist.">
+
+<!-- App (PWA) -->
 <meta name="theme-color" content="#1d4d3c">
-<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("madeira-theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}</script>
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="icon-180.png">
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Madeira">
-<link rel="stylesheet" href="style.css?v=32">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
+
+<!-- Opmaak -->
+<link rel="stylesheet" href="style.css?v=33">
+
+<!-- Vóór het tonen van de pagina: JavaScript-vlag en gekozen thema (licht/donker) zetten -->
+<script>
+  document.documentElement.classList.add('js');
+  try {
+    var t = localStorage.getItem('madeira-theme');
+    if (t === 'light' || t === 'dark') { document.documentElement.setAttribute('data-theme', t); }
+  } catch (e) {}
+</script>
 </head>
 <body id="top">
 <a class="skip" href="#inhoud">Direct naar de inhoud</a>
@@ -943,7 +956,7 @@
   </ul>
 </nav>
 
-<script src="app.js?v=32" defer></script>
-<script src="maps.js?v=32" defer></script>
+<script src="app.js?v=33" defer></script>
+<script src="maps.js?v=33" defer></script>
 </body>
 </html>
