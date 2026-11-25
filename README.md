@@ -9,3 +9,7 @@ Statische site (HTML/CSS/JS) met een service worker voor offline gebruik, gehost
 - Toegankelijkheid (pa11y is globaal geïnstalleerd, er zijn geen lokale packages nodig):
   `pa11y https://docentdavid.github.io/madeira/` en `pa11y --runner axe https://docentdavid.github.io/madeira/`
 - Datum simuleren (banner "Vandaag", tab Dagen): voeg `?datum=2026-12-23` toe aan de URL.
+- Lighthouse (globaal geïnstalleerd): `lighthouse https://docentdavid.github.io/madeira/ --form-factor=mobile`
+- WAVE: https://wave.webaim.org/report#/https://docentdavid.github.io/madeira/
+
+Een overzicht van nog meer testtools (toegankelijkheid, prestaties, PWA, beveiliging, React en Next.js) staat in [TESTTOOLS.md](TESTTOOLS.md).
