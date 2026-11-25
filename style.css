@@ -446,4 +446,6 @@ html.map-open .tabbar, html.map-open .daynav { visibility: hidden; }
 .pbadge.sm { width: 22px; height: 22px; font-size: .8rem; margin-top: 2px; }
 .pline > .pbadge.sm { margin-top: 11px; }
 p.pline > .pbadge.sm { margin-top: 2px; }
-.pstart { font-weight: 700; margin: 10px 0 0; }
+.pstart { font-size: 1rem; line-height: inherit; font-weight: 700; margin: 10px 0 0; }
+.js .nojs { display: none; }
+.map .nojs { margin: 0; padding: 16px; }

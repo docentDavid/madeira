@@ -6,7 +6,7 @@
 <title>Madeira – reisgids 17-23 december 2026</title>
 <meta name="description" content="Wandelreisgids Madeira 17-23 december 2026: zes dagplannen met routes, GPX-links, uitzichtpunten, alternatieven en een checklist.">
 <meta name="theme-color" content="#1d4d3c">
-<script>try{var t=localStorage.getItem("madeira-theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}</script>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("madeira-theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}</script>
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="manifest" href="manifest.webmanifest">
@@ -14,7 +14,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Madeira">
-<link rel="stylesheet" href="style.css?v=30">
+<link rel="stylesheet" href="style.css?v=31">
 </head>
 <body id="top">
 <a class="skip" href="#inhoud">Direct naar de inhoud</a>
@@ -75,7 +75,7 @@
 <!-- ============ DAG 17 ============ -->
 <article id="dag17" class="day wrap" aria-labelledby="dag17-h" data-date="2026-12-17">
   <header class="day-head">
-    <p class="day-date"><time datetime="2026-12-17">Donderdag 17 december</time></p>
+    <div class="day-date"><time datetime="2026-12-17">Donderdag 17 december</time></div>
     <p class="eyebrow">Landing + wandelen · vulkanische oostkust</p>
     <h2 id="dag17-h">Ponta de São Lourenço</h2>
     <p class="intro">Na landing rond 10:30 de huurauto ophalen en direct naar Baía d’Abra. Dat scheelt een extra rit vanuit Ribeira Brava.</p>
@@ -104,7 +104,7 @@
       <h3 id="dag17-k">Routekaart</h3>
       <button type="button" class="mapclose" hidden>Sluiten<span class="sr"> volledig scherm</span></button>
     </div>
-    <div class="map" id="map-dag17" role="region" aria-label="Interactieve kaart met de GPX-route van Ponta de São Lourenço"><noscript>De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</noscript></div>
+    <div class="map" id="map-dag17" role="region" aria-label="Interactieve kaart met de GPX-route van Ponta de São Lourenço"><p class="nojs">De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</p></div>
     <div class="maptools">
       <button type="button" class="mapbtn" data-act="fs" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Groot scherm</span></button>
       <button type="button" class="mapbtn" data-act="loc"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Mijn locatie</span></button>
@@ -184,7 +184,7 @@
 <!-- ============ DAG 18 ============ -->
 <article id="dag18" class="day wrap" aria-labelledby="dag18-h" data-date="2026-12-18">
   <header class="day-head">
-    <p class="day-date"><time datetime="2026-12-18">Vrijdag 18 december</time></p>
+    <div class="day-date"><time datetime="2026-12-18">Vrijdag 18 december</time></div>
     <p class="eyebrow">De hoogste toppen · boven de wolken</p>
     <h2 id="dag18-h">Pico do Areeiro + Pico Ruivo</h2>
     <p class="intro">De volledige PR1 is volgens de laatste veiligheidsmelding niet begaanbaar. Doe daarom twee aparte wandelingen met een autorit ertussen.</p>
@@ -205,7 +205,7 @@
       <h3 id="dag18-k">Routekaart</h3>
       <button type="button" class="mapclose" hidden>Sluiten<span class="sr"> volledig scherm</span></button>
     </div>
-    <div class="map" id="map-dag18" role="region" aria-label="Interactieve kaart met de GPX-route van Pico Ruivo"><noscript>De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</noscript></div>
+    <div class="map" id="map-dag18" role="region" aria-label="Interactieve kaart met de GPX-route van Pico Ruivo"><p class="nojs">De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</p></div>
     <div class="maptools">
       <button type="button" class="mapbtn" data-act="fs" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Groot scherm</span></button>
       <button type="button" class="mapbtn" data-act="loc"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Mijn locatie</span></button>
@@ -229,9 +229,9 @@
         <p>Eerst PR1 vanaf Pico do Areeiro tot Pedra Rija (1,2 km) en over exact dezelfde weg terug. Rijd daarna naar Achada do Teixeira en wandel PR1.2 naar Pico Ruivo (2,8 km enkele reis) en terug.</p>
         <p class="small muted">Start: Pico do Areeiro</p>
       
-        <p class="pstart">Start PR1 (Pico do Areeiro)</p>
+        <h4 class="pstart">Start PR1 (Pico do Areeiro)</h4>
         <div class="pline"><span class="pbadge sm" aria-hidden="true">P</span><span class="sr">Parkeren: </span><ul><li><span class="pfee betaald">Betaald</span> ca. 130 m lopen · 30 plaatsen <a class="ext" href="https://www.google.com/maps/dir/?api=1&amp;destination=32.7343,-16.928858&amp;travelmode=driving">Navigeer<span class="sr"> naar parkeerplaats Start PR1 (Pico do Areeiro)</span></a></li><li><span class="pfee betaald">Betaald</span> ca. 650 m lopen <a class="ext" href="https://www.google.com/maps/dir/?api=1&amp;destination=32.729836,-16.926987&amp;travelmode=driving">Navigeer<span class="sr"> naar parkeerplaats Start PR1 (Pico do Areeiro)</span></a></li></ul></div>
-        <p class="pstart">Start PR1.2 (Achada do Teixeira)</p>
+        <h4 class="pstart">Start PR1.2 (Achada do Teixeira)</h4>
         <div class="pline"><span class="pbadge sm" aria-hidden="true">P</span><span class="sr">Parkeren: </span><ul><li><span class="pfee gratis">Gratis</span> ca. 20 m lopen <a class="ext" href="https://www.google.com/maps/dir/?api=1&amp;destination=32.765042,-16.920941&amp;travelmode=driving">Navigeer<span class="sr"> naar parkeerplaats Start PR1.2 (Achada do Teixeira)</span></a></li></ul></div>
       </section>
       <section class="panel" aria-labelledby="dag18-r">
@@ -282,7 +282,7 @@
 <!-- ============ DAG 19 ============ -->
 <article id="dag19" class="day wrap" aria-labelledby="dag19-h" data-date="2026-12-19">
   <header class="day-head">
-    <p class="day-date"><time datetime="2026-12-19">Zaterdag 19 december</time></p>
+    <div class="day-date"><time datetime="2026-12-19">Zaterdag 19 december</time></div>
     <p class="eyebrow">Laurierbos + levada · tunnels en watervallen</p>
     <h2 id="dag19-h">Caldeirão Verde</h2>
     <p class="intro">Wandel vanaf bospark Queimadas langs de levada, door smalle tunnels en langs steile groene wanden naar de waterval van Caldeirão Verde.</p>
@@ -302,7 +302,7 @@
       <h3 id="dag19-k">Routekaart</h3>
       <button type="button" class="mapclose" hidden>Sluiten<span class="sr"> volledig scherm</span></button>
     </div>
-    <div class="map" id="map-dag19" role="region" aria-label="Interactieve kaart met de GPX-route van Caldeirão Verde"><noscript>De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</noscript></div>
+    <div class="map" id="map-dag19" role="region" aria-label="Interactieve kaart met de GPX-route van Caldeirão Verde"><p class="nojs">De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</p></div>
     <div class="maptools">
       <button type="button" class="mapbtn" data-act="fs" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Groot scherm</span></button>
       <button type="button" class="mapbtn" data-act="loc"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Mijn locatie</span></button>
@@ -385,7 +385,7 @@
 <!-- ============ DAG 20 ============ -->
 <article id="dag20" class="day wrap" aria-labelledby="dag20-h" data-date="2026-12-20">
   <header class="day-head">
-    <p class="day-date"><time datetime="2026-12-20">Zondag 20 december</time></p>
+    <div class="day-date"><time datetime="2026-12-20">Zondag 20 december</time></div>
     <p class="eyebrow">Twee routes, één dag · bos en noordoostkust</p>
     <h2 id="dag20-h">Balcões + Levada do Rei</h2>
     <p class="intro">Eerst een kort panorama bij Balcões, daarna een lange, weelderig groene levada naar Ribeiro Bonito in São Jorge.</p>
@@ -406,7 +406,7 @@
       <h3 id="dag20-k">Routekaart</h3>
       <button type="button" class="mapclose" hidden>Sluiten<span class="sr"> volledig scherm</span></button>
     </div>
-    <div class="map" id="map-dag20" role="region" aria-label="Interactieve kaart met de GPX-route van Balcões en Levada do Rei"><noscript>De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</noscript></div>
+    <div class="map" id="map-dag20" role="region" aria-label="Interactieve kaart met de GPX-route van Balcões en Levada do Rei"><p class="nojs">De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</p></div>
     <div class="maptools">
       <button type="button" class="mapbtn" data-act="fs" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Groot scherm</span></button>
       <button type="button" class="mapbtn" data-act="loc"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Mijn locatie</span></button>
@@ -430,9 +430,9 @@
         <p>PR11 Balcões: 1,5 km heen en 1,5 km terug. Rijd daarna naar het PR18-startpunt bij São Jorge. PR18 Levada do Rei: 5,3 km heen naar Ribeiro Bonito, dan langs dezelfde weg terug.</p>
         <p class="small muted">Start: Ribeiro Frio, Santana</p>
       
-        <p class="pstart">Start PR11 (Ribeiro Frio)</p>
+        <h4 class="pstart">Start PR11 (Ribeiro Frio)</h4>
         <div class="pline"><span class="pbadge sm" aria-hidden="true">P</span><span class="sr">Parkeren: </span><ul><li><span class="pfee gratis">Gratis</span> ca. 160 m lopen · 7 plaatsen <a class="ext" href="https://www.google.com/maps/dir/?api=1&amp;destination=32.734621,-16.884762&amp;travelmode=driving">Navigeer<span class="sr"> naar parkeerplaats Start PR11 (Ribeiro Frio)</span></a></li></ul></div>
-        <p class="pstart">Start PR18 (Levada do Rei)</p>
+        <h4 class="pstart">Start PR18 (Levada do Rei)</h4>
         <div class="pline"><span class="pbadge sm" aria-hidden="true">P</span><span class="sr">Parkeren: </span><ul><li><span class="pfee gratis">Gratis</span> ca. 20 m lopen · 8 plaatsen <a class="ext" href="https://www.google.com/maps/dir/?api=1&amp;destination=32.816849,-16.924634&amp;travelmode=driving">Navigeer<span class="sr"> naar parkeerplaats Start PR18 (Levada do Rei)</span></a></li></ul></div>
       </section>
       <section class="panel" aria-labelledby="dag20-r">
@@ -479,7 +479,7 @@
 <!-- ============ DAG 21 ============ -->
 <article id="dag21" class="day wrap" aria-labelledby="dag21-h" data-date="2026-12-21">
   <header class="day-head">
-    <p class="day-date"><time datetime="2026-12-21">Maandag 21 december</time></p>
+    <div class="day-date"><time datetime="2026-12-21">Maandag 21 december</time></div>
     <p class="eyebrow">De grote watervaldag · vier waterroutes</p>
     <h2 id="dag21-h">Rabaçal: 25 Fontes, Risco en Lagoa do Vento</h2>
     <p class="intro">De mooiste lange combinatie in Rabaçal: Levada do Alecrim, Lagoa do Vento, 25 Fontes en Risco door hetzelfde groene gebied.</p>
@@ -499,7 +499,7 @@
       <h3 id="dag21-k">Routekaart</h3>
       <button type="button" class="mapclose" hidden>Sluiten<span class="sr"> volledig scherm</span></button>
     </div>
-    <div class="map" id="map-dag21" role="region" aria-label="Interactieve kaart met de GPX-route van Rabaçal"><noscript>De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</noscript></div>
+    <div class="map" id="map-dag21" role="region" aria-label="Interactieve kaart met de GPX-route van Rabaçal"><p class="nojs">De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</p></div>
     <div class="maptools">
       <button type="button" class="mapbtn" data-act="fs" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Groot scherm</span></button>
       <button type="button" class="mapbtn" data-act="loc"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Mijn locatie</span></button>
@@ -591,7 +591,7 @@
 <!-- ============ DAG 22 ============ -->
 <article id="dag22" class="day wrap" aria-labelledby="dag22-h" data-date="2026-12-22">
   <header class="day-head">
-    <p class="day-date"><time datetime="2026-12-22">Dinsdag 22 december</time></p>
+    <div class="day-date"><time datetime="2026-12-22">Dinsdag 22 december</time></div>
     <p class="eyebrow">Bos + zwarte stranden · sprookjesbos en ruige kust</p>
     <h2 id="dag22-h">Fanal + de noordwestkust</h2>
     <p class="intro">Begin in het sprookjesachtige Fanal-bos en rijd daarna langs de meest dramatische kust van Madeira: Achadas da Cruz, Porto Moniz, Ribeira da Janela en Seixal.</p>
@@ -611,7 +611,7 @@
       <h3 id="dag22-k">Routekaart</h3>
       <button type="button" class="mapclose" hidden>Sluiten<span class="sr"> volledig scherm</span></button>
     </div>
-    <div class="map" id="map-dag22" role="region" aria-label="Interactieve kaart met de GPX-route van Fanal"><noscript>De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</noscript></div>
+    <div class="map" id="map-dag22" role="region" aria-label="Interactieve kaart met de GPX-route van Fanal"><p class="nojs">De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</p></div>
     <div class="maptools">
       <button type="button" class="mapbtn" data-act="fs" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Groot scherm</span></button>
       <button type="button" class="mapbtn" data-act="loc"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Mijn locatie</span></button>
@@ -695,7 +695,7 @@
 <!-- ============ DAG 23 ============ -->
 <article id="dag23" class="day wrap" aria-labelledby="dag23-h" data-date="2026-12-23">
   <header class="day-head">
-    <p class="day-date"><time datetime="2026-12-23">Woensdag 23 december</time></p>
+    <div class="day-date"><time datetime="2026-12-23">Woensdag 23 december</time></div>
     <p class="eyebrow">Vertrekdag · terug naar huis</p>
     <h2 id="dag23-h">Terugreis</h2>
     <p class="intro">De vlucht vertrekt om <strong>10:30</strong>. Je moet uiterlijk <strong>08:30</strong> ingecheckt zijn (2 uur van tevoren) en daarvoor de huurauto inleveren. Reken vanaf Ribeira Brava ruim, want de ochtendspits rond Funchal kan de rit vertragen.</p>
@@ -723,7 +723,7 @@
       <h3 id="dag23-k">Rit naar de luchthaven</h3>
       <button type="button" class="mapclose" hidden>Sluiten<span class="sr"> volledig scherm</span></button>
     </div>
-    <div class="map" id="map-dag23" role="region" aria-label="Interactieve kaart met de GPX-route naar de luchthaven"><noscript>De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</noscript></div>
+    <div class="map" id="map-dag23" role="region" aria-label="Interactieve kaart met de GPX-route naar de luchthaven"><p class="nojs">De kaart heeft JavaScript nodig. Gebruik de GPX-links hieronder.</p></div>
     <div class="maptools">
       <button type="button" class="mapbtn" data-act="fs" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Groot scherm</span></button>
       <button type="button" class="mapbtn" data-act="loc"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Mijn locatie</span></button>
@@ -944,7 +944,7 @@
   </ul>
 </nav>
 
-<script src="app.js?v=30" defer></script>
-<script src="maps.js?v=30" defer></script>
+<script src="app.js?v=31" defer></script>
+<script src="maps.js?v=31" defer></script>
 </body>
 </html>
